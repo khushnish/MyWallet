@@ -6,5 +6,10 @@
     <string name="action_add_details">Add Details</string>
     <string name="action_notes">Notes</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="add_details_hint_cardnumber">Card Number</string>
+    <string name="add_details_hint_cardholdername">Card Holder Name</string>
+    <string name="add_details_hint_cvvnumber">CVV Number</string>
+    <string name="add_details_hint_cardtransactionpassword">Card Transaction Password</string>
 
 </resources>

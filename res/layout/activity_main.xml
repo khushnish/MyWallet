@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <ListView
-        android:id="@+id/activity_main_list"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:cacheColorHint="@android:color/transparent" />
+    <FrameLayout
+        android:id="@+id/activity_main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

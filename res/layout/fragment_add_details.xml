@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/fragment_add_details_edt_cardnumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="@string/add_details_hint_cardnumber"
+        android:inputType="number"
+        android:maxLength="20"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/fragment_add_details_edt_cardholdername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="@string/add_details_hint_cardholdername"
+        android:inputType="textPersonName"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/fragment_add_details_edt_cvvnumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="@string/add_details_hint_cvvnumber"
+        android:inputType="numberPassword"
+        android:maxLength="3"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/fragment_add_details_edt_cardtransactionpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="@string/add_details_hint_cardtransactionpassword"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+</LinearLayout>

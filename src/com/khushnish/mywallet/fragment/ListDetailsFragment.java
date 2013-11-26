@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AddDetailsFragment extends Fragment {
+public class ListDetailsFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.fragment_add_details, null);
+		final View view = inflater.inflate(R.layout.fragment_list_details, null);
 		return view;
 	}
 }

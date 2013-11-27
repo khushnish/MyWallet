@@ -15,6 +15,17 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040003;
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
+        public static final int bottom_in=0x7f040006;
+        public static final int bottom_out=0x7f040007;
+        public static final int left_in=0x7f040008;
+        public static final int left_out=0x7f040009;
+        public static final int right_in=0x7f04000a;
+        public static final int right_out=0x7f04000b;
+        public static final int top_in=0x7f04000c;
+        public static final int top_out=0x7f04000d;
+    }
+    public static final class array {
+        public static final int titles=0x7f0c0000;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -983,7 +994,6 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020057;
     }
     public static final class id {
-        public static final int action_add_details=0x7f050042;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -995,7 +1005,6 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_notes=0x7f050043;
         public static final int action_settings=0x7f050044;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int activity_main_frame=0x7f05003c;
@@ -1030,6 +1039,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
+        public static final int row_fragment_list_details_title=0x7f050043;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1047,6 +1057,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
+        public static final int textViewRoboto1=0x7f050042;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
@@ -1104,11 +1115,14 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int activity_main=0x7f030017;
         public static final int fragment_add_details=0x7f030018;
-        public static final int fragment_list_details=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int fragment_list_carddetails=0x7f030019;
+        public static final int fragment_list_details=0x7f03001a;
+        public static final int fragment_settings=0x7f03001b;
+        public static final int row_fragment_list_details=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int main=0x7f0d0000;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1154,11 +1168,15 @@ containing a value of this type.
         public static final int action_add_details=0x7f0a000e;
         public static final int action_notes=0x7f0a000f;
         public static final int action_settings=0x7f0a0010;
-        public static final int add_details_hint_cardholdername=0x7f0a0012;
-        public static final int add_details_hint_cardnumber=0x7f0a0011;
-        public static final int add_details_hint_cardtransactionpassword=0x7f0a0014;
-        public static final int add_details_hint_cvvnumber=0x7f0a0013;
+        public static final int add_details_card_atmpinmumber=0x7f0a0015;
+        public static final int add_details_card_holdername=0x7f0a0013;
+        public static final int add_details_card_number=0x7f0a0012;
+        public static final int add_details_card_transactionpassword=0x7f0a0016;
+        public static final int add_details_card_validfrom=0x7f0a0017;
+        public static final int add_details_card_validtill=0x7f0a0018;
+        public static final int add_details_hint_cvvnumber=0x7f0a0014;
         public static final int app_name=0x7f0a000d;
+        public static final int db_name=0x7f0a0011;
     }
     public static final class style {
         /** 

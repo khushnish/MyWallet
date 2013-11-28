@@ -1169,12 +1169,12 @@ containing a value of this type.
         public static final int action_notes=0x7f0a000f;
         public static final int action_settings=0x7f0a0010;
         public static final int add_details_card_atmpinmumber=0x7f0a0015;
+        public static final int add_details_card_cvvnumber=0x7f0a0014;
         public static final int add_details_card_holdername=0x7f0a0013;
         public static final int add_details_card_number=0x7f0a0012;
         public static final int add_details_card_transactionpassword=0x7f0a0016;
         public static final int add_details_card_validfrom=0x7f0a0017;
         public static final int add_details_card_validtill=0x7f0a0018;
-        public static final int add_details_hint_cvvnumber=0x7f0a0014;
         public static final int app_name=0x7f0a000d;
         public static final int db_name=0x7f0a0011;
     }

@@ -10,7 +10,7 @@
     
     <string name="add_details_card_number">Card Number</string>
     <string name="add_details_card_holdername">Card Holder Name</string>
-    <string name="add_details_hint_cvvnumber">CVV Number</string>
+    <string name="add_details_card_cvvnumber">CVV Number</string>
     <string name="add_details_card_atmpinmumber">Card ATM Pin Number</string>
     <string name="add_details_card_transactionpassword">Card Transaction Password</string>
     <string name="add_details_card_validfrom">Valid From</string>

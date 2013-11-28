@@ -354,12 +354,12 @@ int string action_add_details 0x7f0a000e
 int string action_notes 0x7f0a000f
 int string action_settings 0x7f0a0010
 int string add_details_card_atmpinmumber 0x7f0a0015
+int string add_details_card_cvvnumber 0x7f0a0014
 int string add_details_card_holdername 0x7f0a0013
 int string add_details_card_number 0x7f0a0012
 int string add_details_card_transactionpassword 0x7f0a0016
 int string add_details_card_validfrom 0x7f0a0017
 int string add_details_card_validtill 0x7f0a0018
-int string add_details_hint_cvvnumber 0x7f0a0014
 int string app_name 0x7f0a000d
 int string db_name 0x7f0a0011
 int style AppBaseTheme 0x7f0b0083

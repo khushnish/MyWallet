@@ -8,6 +8,10 @@
     <string name="action_settings">Settings</string>
     <string name="db_name">wallet.sqlite</string>
     
+    <string name="add_details_card_visa">Visa</string>
+    <string name="add_details_card_master">Master</string>
+    <string name="add_details_card_mastero">Mastero</string>
+    <string name="add_details_card_other">Other</string>
     <string name="add_details_card_number">Card Number</string>
     <string name="add_details_card_holdername">Card Holder Name</string>
     <string name="add_details_card_cvvnumber">CVV Number</string>

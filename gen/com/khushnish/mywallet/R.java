@@ -1005,7 +1005,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050044;
+        public static final int action_settings=0x7f05004a;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int activity_main_frame=0x7f05003c;
         public static final int always=0x7f05000b;
@@ -1020,11 +1020,17 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int fragment_add_details_edt_cardholdername=0x7f05003e;
-        public static final int fragment_add_details_edt_cardnumber=0x7f05003d;
-        public static final int fragment_add_details_edt_cardtransactionpassword=0x7f050040;
-        public static final int fragment_add_details_edt_cvvnumber=0x7f05003f;
-        public static final int fragment_list_details_list=0x7f050041;
+        public static final int fragment_add_carddetails_rb_master=0x7f05003f;
+        public static final int fragment_add_carddetails_rb_mastero=0x7f050040;
+        public static final int fragment_add_carddetails_rb_other=0x7f050041;
+        public static final int fragment_add_carddetails_rb_visa=0x7f05003e;
+        public static final int fragment_add_details_edt_cardholdername=0x7f050044;
+        public static final int fragment_add_details_edt_cardnumber=0x7f050043;
+        public static final int fragment_add_details_edt_cardtransactionpassword=0x7f050046;
+        public static final int fragment_add_details_edt_cvvnumber=0x7f050045;
+        public static final int fragment_add_details_txt_cardnumber=0x7f050042;
+        public static final int fragment_add_details_txt_cardtype=0x7f05003d;
+        public static final int fragment_list_details_list=0x7f050047;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
@@ -1032,6 +1038,7 @@ containing a value of this type.
         public static final int image=0x7f050027;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
+        public static final int menu_addcarddetails_add_details=0x7f05004b;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
@@ -1039,7 +1046,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
-        public static final int row_fragment_list_details_title=0x7f050043;
+        public static final int row_fragment_list_details_title=0x7f050049;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1057,7 +1064,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int textViewRoboto1=0x7f050042;
+        public static final int textViewRoboto1=0x7f050048;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
@@ -1114,7 +1121,7 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int activity_main=0x7f030017;
-        public static final int fragment_add_details=0x7f030018;
+        public static final int fragment_add_carddetails=0x7f030018;
         public static final int fragment_list_carddetails=0x7f030019;
         public static final int fragment_list_details=0x7f03001a;
         public static final int fragment_settings=0x7f03001b;
@@ -1123,6 +1130,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
+        public static final int menu_addcarddetails=0x7f0d0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1168,13 +1176,17 @@ containing a value of this type.
         public static final int action_add_details=0x7f0a000e;
         public static final int action_notes=0x7f0a000f;
         public static final int action_settings=0x7f0a0010;
-        public static final int add_details_card_atmpinmumber=0x7f0a0015;
-        public static final int add_details_card_cvvnumber=0x7f0a0014;
-        public static final int add_details_card_holdername=0x7f0a0013;
-        public static final int add_details_card_number=0x7f0a0012;
-        public static final int add_details_card_transactionpassword=0x7f0a0016;
-        public static final int add_details_card_validfrom=0x7f0a0017;
-        public static final int add_details_card_validtill=0x7f0a0018;
+        public static final int add_details_card_atmpinmumber=0x7f0a0019;
+        public static final int add_details_card_cvvnumber=0x7f0a0018;
+        public static final int add_details_card_holdername=0x7f0a0017;
+        public static final int add_details_card_master=0x7f0a0013;
+        public static final int add_details_card_mastero=0x7f0a0014;
+        public static final int add_details_card_number=0x7f0a0016;
+        public static final int add_details_card_other=0x7f0a0015;
+        public static final int add_details_card_transactionpassword=0x7f0a001a;
+        public static final int add_details_card_validfrom=0x7f0a001b;
+        public static final int add_details_card_validtill=0x7f0a001c;
+        public static final int add_details_card_visa=0x7f0a0012;
         public static final int app_name=0x7f0a000d;
         public static final int db_name=0x7f0a0011;
     }

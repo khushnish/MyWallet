@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,123 +8,440 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:weightSum="3" >
+        android:orientation="vertical" >
 
-        <com.khushnish.mywallet.utils.TextViewRoboto
-            android:id="@+id/fragment_add_details_txt_cardtype"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:singleLine="true"
-            android:text="@string/add_details_card_number"
-            android:textSize="15sp" />
-
-        <RadioGroup
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:orientation="vertical" >
-
-            <com.khushnish.mywallet.utils.RadioButtonRoboto
-                android:id="@+id/fragment_add_carddetails_rb_visa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:singleLine="true"
-                android:text="@string/add_details_card_visa"
-                android:textSize="15sp" />
-
-            <com.khushnish.mywallet.utils.RadioButtonRoboto
-                android:id="@+id/fragment_add_carddetails_rb_master"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_details_card_master"
-                android:textSize="15sp" />
-
-            <com.khushnish.mywallet.utils.RadioButtonRoboto
-                android:id="@+id/fragment_add_carddetails_rb_mastero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_details_card_mastero"
-                android:textSize="15sp" />
-
-            <com.khushnish.mywallet.utils.RadioButtonRoboto
-                android:id="@+id/fragment_add_carddetails_rb_other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_details_card_other"
-                android:textSize="15sp" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:weightSum="3" >
-
-        <com.khushnish.mywallet.utils.TextViewRoboto
-            android:id="@+id/fragment_add_details_txt_cardnumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:singleLine="true"
-            android:text="@string/add_details_card_number" />
-
-        <com.khushnish.mywallet.utils.EditTextRoboto
-            android:id="@+id/fragment_add_details_edt_cardnumber"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_weight="1.5"
-            android:hint="@string/add_details_card_number"
-            android:inputType="number"
-            android:textSize="15sp"
-            android:maxLength="20"
-            android:singleLine="true" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardtype"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_type"
+                android:textSize="12sp" />
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:orientation="vertical" >
+
+                <com.khushnish.mywallet.utils.RadioButtonRoboto
+                    android:id="@+id/fragment_add_carddetails_rb_visa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:singleLine="true"
+                    android:text="@string/add_details_card_visa"
+                    android:textSize="15sp" />
+
+                <com.khushnish.mywallet.utils.RadioButtonRoboto
+                    android:id="@+id/fragment_add_carddetails_rb_master"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_details_card_master"
+                    android:textSize="15sp" />
+
+                <com.khushnish.mywallet.utils.RadioButtonRoboto
+                    android:id="@+id/fragment_add_carddetails_rb_mastero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_details_card_mastero"
+                    android:textSize="15sp" />
+
+                <com.khushnish.mywallet.utils.RadioButtonRoboto
+                    android:id="@+id/fragment_add_carddetails_rb_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_details_card_other"
+                    android:textSize="15sp" />
+
+                <com.khushnish.mywallet.utils.EditTextRoboto
+                    android:id="@+id/fragment_add_carddetails_edtthername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_details_card_other"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardusertype"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_usertype"
+                android:textSize="12sp" />
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:orientation="vertical" >
+
+                <com.khushnish.mywallet.utils.RadioButtonRoboto
+                    android:id="@+id/fragment_add_carddetails_rb_personal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:singleLine="true"
+                    android:text="@string/add_details_card_usertype_personal"
+                    android:textSize="15sp" />
+
+                <com.khushnish.mywallet.utils.RadioButtonRoboto
+                    android:id="@+id/fragment_add_carddetails_rb_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_details_card_usertype_business"
+                    android:textSize="15sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_bankname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_bankname"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_details_edt_bankname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_details_card_bankname"
+                android:inputType="number"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_bankaccountnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_bankaccountnumber"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_details_edt_bankaccountnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_details_card_bankaccountnumber"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_bankcustomerid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_bankcustomerid"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_details_edt_bankcustomerid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_details_card_bankcustomerid"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_number"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_details_edt_cardnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_details_card_number"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardholdername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_holdername"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_details_edt_cardholdername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_details_card_holdername"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardcvvnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_cvvnumber"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1.8"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="3" >
+
+                <com.khushnish.mywallet.utils.EditTextRoboto
+                    android:id="@+id/fragment_add_details_edt_cardcvvnumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_details_card_cvvnumber"
+                    android:inputType="numberPassword"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <com.khushnish.mywallet.utils.CheckBoxRoboto
+                    android:id="@+id/fragment_add_details_chk_cardcvvnumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/add_details_card_show_cvvnumber"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardatmpinmumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_atmpinmumber"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1.8"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="3" >
+
+                <com.khushnish.mywallet.utils.EditTextRoboto
+                    android:id="@+id/fragment_add_details_edt_cardatmpinmumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_details_card_atmpinmumber"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <com.khushnish.mywallet.utils.CheckBoxRoboto
+                    android:id="@+id/fragment_add_details_chk_cardatmpinmumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/add_details_card_show_atmpinmumber"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_cardtransactionpassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="false"
+                android:text="@string/add_details_card_transactionpassword"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1.8"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="3" >
+
+                <com.khushnish.mywallet.utils.EditTextRoboto
+                    android:id="@+id/fragment_add_details_edt_cardtransactionpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/add_details_card_transactionpassword"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+                <com.khushnish.mywallet.utils.CheckBoxRoboto
+                    android:id="@+id/fragment_add_details_chk_transactionpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/add_details_card_show_transactionpassword"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black" />
-
-    <com.khushnish.mywallet.utils.EditTextRoboto
-        android:id="@+id/fragment_add_details_edt_cardholdername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="@string/add_details_card_holdername"
-        android:inputType="textPersonName"
-        android:singleLine="true" />
-
-    <com.khushnish.mywallet.utils.EditTextRoboto
-        android:id="@+id/fragment_add_details_edt_cvvnumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="@string/add_details_card_cvvnumber"
-        android:inputType="numberPassword"
-        android:maxLength="3"
-        android:singleLine="true" />
-
-    <com.khushnish.mywallet.utils.EditTextRoboto
-        android:id="@+id/fragment_add_details_edt_cardtransactionpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="@string/add_details_card_transactionpassword"
-        android:inputType="textPassword"
-        android:singleLine="true" />
-
-</LinearLayout>
+</ScrollView>

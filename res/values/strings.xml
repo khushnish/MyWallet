@@ -12,13 +12,25 @@
     <string name="add_details_card_master">Master</string>
     <string name="add_details_card_mastero">Mastero</string>
     <string name="add_details_card_other">Other</string>
+    <string name="add_details_card_type">Card Type</string>
+    <string name="add_details_card_usertype">Card User Type</string>
+    <string name="add_details_card_usertype_personal">Personal</string>
+    <string name="add_details_card_usertype_business">Business</string>
+    <string name="add_details_card_bankname">Bank Name</string>
+    <string name="add_details_card_bankaccountnumber">Bank Account Number</string>
+    <string name="add_details_card_bankcustomerid">Bank Cusomer Id</string>
     <string name="add_details_card_number">Card Number</string>
     <string name="add_details_card_holdername">Card Holder Name</string>
     <string name="add_details_card_cvvnumber">CVV Number</string>
+    <string name="add_details_card_show_cvvnumber">Show CVV Number</string>
     <string name="add_details_card_atmpinmumber">Card ATM Pin Number</string>
+    <string name="add_details_card_show_atmpinmumber">Show ATM Pin Number</string>
     <string name="add_details_card_transactionpassword">Card Transaction Password</string>
+    <string name="add_details_card_show_transactionpassword">Show Password</string>
     <string name="add_details_card_validfrom">Valid From</string>
     <string name="add_details_card_validtill">Valid Till</string>
+    
+    
 	
     <string-array name="titles">
         <item>Cards Details</item>

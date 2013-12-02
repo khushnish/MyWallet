@@ -29,8 +29,8 @@ public class ListDetailsFragment extends Fragment {
 	}
 	
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
 		((MainActivity) getActivity()).hideBackButton();
 	}
 	
@@ -51,11 +51,12 @@ public class ListDetailsFragment extends Fragment {
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out,R.anim.left_in, R.anim.right_out);
 				
 				if ( position == 0 ) {
-					transaction.replace(R.id.activity_main_frame, new ListCardDetailsFragment(), "ListCardDetails");
-					transaction.addToBackStack("ListCardDetails");
+					transaction.add(R.id.activity_main_frame, new ListCardDetailsFragment(), ListCardDetailsFragment.class.getSimpleName());
+					transaction.addToBackStack(ListCardDetailsFragment.class.getSimpleName());
 				} else if ( position == 1 ) {
 					
 				}
+				transaction.hide(ListDetailsFragment.this);
 				transaction.commit();
 			}
 		});
@@ -76,8 +77,9 @@ public class ListDetailsFragment extends Fragment {
 		
 		if ( item.getItemId() == R.id.action_settings ) {
 			
-			transaction.replace(R.id.activity_main_frame, new SettingsFragment(), "Settings");
-			transaction.addToBackStack("Settings");
+			transaction.add(R.id.activity_main_frame, new SettingsFragment(), SettingsFragment.class.getSimpleName());
+			transaction.addToBackStack(SettingsFragment.class.getSimpleName());
+			transaction.hide(this);
 			transaction.commit();
 		}
 		return super.onOptionsItemSelected(item);

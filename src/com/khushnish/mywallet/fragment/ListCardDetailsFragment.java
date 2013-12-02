@@ -54,8 +54,9 @@ public class ListCardDetailsFragment extends Fragment {
 			final FragmentTransaction transaction = fragmentManager.beginTransaction();
 			transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out,R.anim.left_in, R.anim.right_out);
 			
-			transaction.replace(R.id.activity_main_frame, new AddCardDetailsFragment(), "AddCardDetails");
-			transaction.addToBackStack("AddCardDetails");
+			transaction.add(R.id.activity_main_frame, new AddCardDetailsFragment(), AddCardDetailsFragment.class.getSimpleName());
+			transaction.addToBackStack(AddCardDetailsFragment.class.getSimpleName());
+			transaction.hide(this);
 			transaction.commit();
 		}
 		return super.onOptionsItemSelected(item);
@@ -113,5 +114,11 @@ public class ListCardDetailsFragment extends Fragment {
 	public void onStop() {
 		super.onStop();
 		Log.e("Fragment", "onStop() called");
+	}
+	
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		Log.e("Fragment", "onHiddenChanged() called " + hidden);
 	}
 }

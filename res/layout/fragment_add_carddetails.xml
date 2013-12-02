@@ -442,6 +442,80 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_validfrom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="false"
+                android:text="@string/add_details_card_validfrom"
+                android:textSize="12sp" />
+
+            <Spinner
+                android:id="@+id/fragment_add_details_spinner_validfrommonth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:entries="@array/months" />
+
+            <Spinner
+                android:id="@+id/fragment_add_details_spinner_validfromyear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:entries="@array/validfromyears" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_validthru"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="false"
+                android:text="@string/add_details_card_validtill"
+                android:textSize="12sp" />
+
+            <Spinner
+                android:id="@+id/fragment_add_details_spinner_validthrumonth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:entries="@array/months" />
+
+            <Spinner
+                android:id="@+id/fragment_add_details_spinner_validthruyear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:entries="@array/validthruyears" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
     </LinearLayout>
 
 </ScrollView>

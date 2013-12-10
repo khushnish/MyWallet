@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			this.database.execSQL("PRAGMA foreign_keys = ON;");
 		}
 		
-		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType INTEGER, OtherCardName TEXT, CardUserType INTEGER, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber INTEGER, CardATMPinNumber INTEGER, CardTransactionPassword TEXT, ValidFromMonth INTEGER, ValidFromYear INTEGER, ValidTillMonth INTEGER, ValidTillYear INTEGER, ImageFront TEXT, ImageBack TEXT)";
+		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType INTEGER, OtherCardName TEXT, CardUserType INTEGER, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber INTEGER, CardATMPinNumber INTEGER, CardTransactionPassword TEXT, CardMobilePinNumber TEXT, ValidFromMonth INTEGER, ValidFromYear INTEGER, ValidTillMonth INTEGER, ValidTillYear INTEGER, ImageFront TEXT, ImageBack TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
 	}

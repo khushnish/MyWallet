@@ -22,6 +22,7 @@ public class CardModel {
 	private int validTillYear = 0;
 	private String imageFront = "";
 	private String imageBack = "";
+	private int bankCardMobilePinNumber = 0;
 
 	public long getId() {
 		return id;
@@ -99,7 +100,7 @@ public class CardModel {
 		return cardCvvNumber;
 	}
 
-	public void setCardCVVNumber(int cardCvvNumber) {
+	public void setCardCvvNumber(int cardCvvNumber) {
 		this.cardCvvNumber = cardCvvNumber;
 	}
 
@@ -166,4 +167,13 @@ public class CardModel {
 	public void setImageBack(String imageBack) {
 		this.imageBack = imageBack;
 	}
+
+	public int getBankCardMobilePinNumber() {
+		return bankCardMobilePinNumber;
+	}
+
+	public void setBankCardMobilePinNumber(int bankCardMobilePinNumber) {
+		this.bankCardMobilePinNumber = bankCardMobilePinNumber;
+	}
+
 }

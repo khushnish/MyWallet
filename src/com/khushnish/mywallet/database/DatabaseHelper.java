@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					cardModel.setBankCustomerId(cursor.getString(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_BANKCUSTOMERID)));
 					cardModel.setCardNumber(cursor.getString(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDNUMBER)));
 					cardModel.setCardHolderName(cursor.getString(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDHOLDERNAME)));
-					cardModel.setCardCVVNumber(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDCVVNUMBER)));
+					cardModel.setCardCvvNumber(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDCVVNUMBER)));
 					cardModel.setCardAtmPinNumber(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDATMPINNUMBER)));
 					cardModel.setCardTransactionPassword(cursor.getString(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDTRANSACTIONPASSWORD)));
 					cardModel.setValidFromMonth(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_VALIDFROMMONTH)));

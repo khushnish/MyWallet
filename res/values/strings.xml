@@ -4,6 +4,7 @@
     <string name="app_name">My Wallet</string>
     
     <string name="action_add_details">Add Details</string>
+    <string name="action_save">Save</string>
     <string name="action_notes">Notes</string>
     <string name="action_settings">Settings</string>
     <string name="db_name">wallet.sqlite</string>
@@ -26,6 +27,8 @@
     <string name="add_details_card_atmpinmumber">Card ATM Pin Number</string>
     <string name="add_details_card_show_atmpinmumber">Show ATM Pin Number</string>
     <string name="add_details_card_transactionpassword">Card Transaction Password</string>
+    <string name="add_details_card_mobilepinnumber">Mobile Pin Number</string>
+    <string name="add_details_card_show_mobilepinnumber">Show Mobile Pin Number</string>
     <string name="add_details_card_show_transactionpassword">Show Password</string>
     <string name="add_details_card_validfrom">Valid From</string>
     <string name="add_details_card_validtill">Valid Till</string>

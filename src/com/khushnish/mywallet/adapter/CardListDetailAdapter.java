@@ -20,6 +20,7 @@ public class CardListDetailAdapter extends ArrayAdapter<CardModel> {
 	public CardListDetailAdapter(Context context, int resource,
 			int textViewResourceId, ArrayList<CardModel> cardModels) {
 		super(context, resource, textViewResourceId, cardModels);
+		this.context = context;
 		this.cardModels = cardModels;
 	}
 	

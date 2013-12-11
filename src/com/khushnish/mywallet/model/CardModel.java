@@ -1,6 +1,9 @@
 package com.khushnish.mywallet.model;
 
-public class CardModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CardModel implements Parcelable {
 
 	private long id = 0;
 	// Visa, Master, Mastro, Other
@@ -23,6 +26,9 @@ public class CardModel {
 	private String imageFront = "";
 	private String imageBack = "";
 	private int bankCardMobilePinNumber = 0;
+	
+	public CardModel() {
+	}
 
 	public long getId() {
 		return id;
@@ -176,4 +182,65 @@ public class CardModel {
 		this.bankCardMobilePinNumber = bankCardMobilePinNumber;
 	}
 
+	protected CardModel(Parcel in) {
+		id = in.readLong();
+		cardType = in.readInt();
+		otherCardName = in.readString();
+		cardUserType = in.readInt();
+		bankName = in.readString();
+		bankAccountNumber = in.readString();
+		bankCustomerId = in.readString();
+		cardNumber = in.readString();
+		cardHolderName = in.readString();
+		cardCvvNumber = in.readInt();
+		cardAtmPinNumber = in.readInt();
+		cardTransactionPassword = in.readString();
+		validFromMonth = in.readInt();
+		validFromYear = in.readInt();
+		validTillMonth = in.readInt();
+		validTillYear = in.readInt();
+		imageFront = in.readString();
+		imageBack = in.readString();
+		bankCardMobilePinNumber = in.readInt();
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(id);
+		dest.writeInt(cardType);
+		dest.writeString(otherCardName);
+		dest.writeInt(cardUserType);
+		dest.writeString(bankName);
+		dest.writeString(bankAccountNumber);
+		dest.writeString(bankCustomerId);
+		dest.writeString(cardNumber);
+		dest.writeString(cardHolderName);
+		dest.writeInt(cardCvvNumber);
+		dest.writeInt(cardAtmPinNumber);
+		dest.writeString(cardTransactionPassword);
+		dest.writeInt(validFromMonth);
+		dest.writeInt(validFromYear);
+		dest.writeInt(validTillMonth);
+		dest.writeInt(validTillYear);
+		dest.writeString(imageFront);
+		dest.writeString(imageBack);
+		dest.writeInt(bankCardMobilePinNumber);
+	}
+
+	public static final Parcelable.Creator<CardModel> CREATOR = new Parcelable.Creator<CardModel>() {
+		@Override
+		public CardModel createFromParcel(Parcel in) {
+			return new CardModel(in);
+		}
+
+		@Override
+		public CardModel[] newArray(int size) {
+			return new CardModel[size];
+		}
+	};
 }

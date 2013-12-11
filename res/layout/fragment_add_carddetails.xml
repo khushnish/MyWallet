@@ -28,6 +28,7 @@
                 android:textSize="12sp" />
 
             <RadioGroup
+                android:id="@+id/fragment_add_carddetails_rg_cardtype"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
@@ -64,7 +65,7 @@
                     android:textSize="15sp" />
 
                 <com.khushnish.mywallet.utils.EditTextRoboto
-                    android:id="@+id/fragment_add_carddetails_edtthername"
+                    android:id="@+id/fragment_add_carddetails_edt_othername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/add_details_card_other"
@@ -96,6 +97,7 @@
                 android:textSize="12sp" />
 
             <RadioGroup
+                android:id="@+id/fragment_add_carddetails_rg_cardusertype"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"

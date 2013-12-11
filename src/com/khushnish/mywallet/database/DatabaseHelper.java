@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			this.database.execSQL("PRAGMA foreign_keys = ON;");
 		}
 		
-		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType INTEGER, OtherCardName TEXT, CardUserType INTEGER, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber INTEGER, CardATMPinNumber INTEGER, CardTransactionPassword TEXT, CardMobilePinNumber TEXT, ValidFromMonth INTEGER, ValidFromYear INTEGER, ValidTillMonth INTEGER, ValidTillYear INTEGER, ImageFront TEXT, ImageBack TEXT)";
+		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType INTEGER, OtherCardName TEXT, CardUserType INTEGER, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber INTEGER, CardATMPinNumber INTEGER, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth INTEGER, ValidFromYear INTEGER, ValidTillMonth INTEGER, ValidTillYear INTEGER, ImageFront TEXT, ImageBack TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
 	}
@@ -66,6 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		try {
 			cursor = database.query(DBConstants.TBL_CARDDETAILS, new String[] {"*"}, null,
 					null, null, null, null);
+			
 			if ( cursor.getCount() > 0 ) {
 				CardModel cardModel;
 				for (int i = 0; i < cursor.getCount(); ++i) {
@@ -82,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					cardModel.setCardHolderName(cursor.getString(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDHOLDERNAME)));
 					cardModel.setCardCvvNumber(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDCVVNUMBER)));
 					cardModel.setCardAtmPinNumber(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDATMPINNUMBER)));
+					cardModel.setBankCardMobilePinNumber(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_BANKMOBILEPINNUMBER)));
 					cardModel.setCardTransactionPassword(cursor.getString(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_CARDTRANSACTIONPASSWORD)));
 					cardModel.setValidFromMonth(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_VALIDFROMMONTH)));
 					cardModel.setValidFromYear(cursor.getInt(cursor.getColumnIndex(DBConstants.COL_CARDDETAILS_VALIDFROMYEAR)));
@@ -120,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			values.put(DBConstants.COL_CARDDETAILS_CARDHOLDERNAME, cardModel.getCardHolderName());
 			values.put(DBConstants.COL_CARDDETAILS_CARDCVVNUMBER, cardModel.getCardCvvNumber());
 			values.put(DBConstants.COL_CARDDETAILS_CARDATMPINNUMBER, cardModel.getCardAtmPinNumber());
+			values.put(DBConstants.COL_CARDDETAILS_BANKMOBILEPINNUMBER, cardModel.getBankCardMobilePinNumber());
 			values.put(DBConstants.COL_CARDDETAILS_CARDTRANSACTIONPASSWORD, cardModel.getCardTransactionPassword());
 			values.put(DBConstants.COL_CARDDETAILS_VALIDFROMMONTH, cardModel.getValidFromMonth());
 			values.put(DBConstants.COL_CARDDETAILS_VALIDFROMYEAR, cardModel.getValidFromYear());

@@ -15,6 +15,7 @@ public class DBConstants {
 	public static final String COL_CARDDETAILS_CARDHOLDERNAME = "CardHolderName";
 	public static final String COL_CARDDETAILS_CARDCVVNUMBER = "CardCVVNumber";
 	public static final String COL_CARDDETAILS_CARDATMPINNUMBER = "CardATMPinNumber";
+	public static final String COL_CARDDETAILS_BANKMOBILEPINNUMBER = "BankMobilePinNumber";
 	public static final String COL_CARDDETAILS_CARDTRANSACTIONPASSWORD = "CardTransactionPassword";
 	public static final String COL_CARDDETAILS_VALIDFROMMONTH = "ValidFromMonth";
 	public static final String COL_CARDDETAILS_VALIDFROMYEAR = "ValidFromYear";

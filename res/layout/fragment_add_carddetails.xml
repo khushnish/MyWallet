@@ -150,7 +150,6 @@
                 android:layout_weight="1.8"
                 android:hint="@string/add_details_card_bankname"
                 android:inputType="number"
-                android:maxLength="20"
                 android:singleLine="true"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -476,7 +475,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/add_details_card_mobilepinnumber"
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
                     android:maxLength="3"
                     android:singleLine="true"
                     android:textSize="12sp" />
@@ -490,12 +489,12 @@
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
-        
-         <View
+
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black" />
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -563,6 +562,68 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
                 android:entries="@array/validthruyears" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_frontimage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="false"
+                android:text="@string/add_details_card_frontimage"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/fragment_add_details_img_front"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_backimage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="false"
+                android:text="@string/add_details_card_backimage"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/fragment_add_details_img_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_launcher" />
         </LinearLayout>
 
         <View

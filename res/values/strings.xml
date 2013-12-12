@@ -32,9 +32,9 @@
     <string name="add_details_card_show_transactionpassword">Show Password</string>
     <string name="add_details_card_validfrom">Valid From</string>
     <string name="add_details_card_validtill">Valid Till</string>
-    
-    
-	
+    <string name="add_details_card_frontimage">CardFront Image</string>
+    <string name="add_details_card_backimage">Card Back Image</string>
+		
     <string-array name="titles">
         <item>Cards Details</item>
         <item>Bank Details</item>

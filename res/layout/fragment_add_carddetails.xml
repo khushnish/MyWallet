@@ -68,7 +68,7 @@
                     android:id="@+id/fragment_add_carddetails_edt_othername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_details_card_other"
+                    android:hint="@string/add_details_card_other"
                     android:textSize="15sp"
                     android:visibility="gone" />
             </RadioGroup>
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
                 android:hint="@string/add_details_card_bankname"
-                android:inputType="number"
+                android:inputType="text"
                 android:singleLine="true"
                 android:textSize="12sp" />
         </LinearLayout>

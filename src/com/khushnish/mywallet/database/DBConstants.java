@@ -24,4 +24,8 @@ public class DBConstants {
 	public static final String COL_CARDDETAILS_IMAGEFRONT = "ImageFront";
 	public static final String COL_CARDDETAILS_IMAGEBACK = "ImageBack";
 	
+	public static final String TBL_SOCIALDETAILS = "SocialDetails";
+	public static final String COL_SOCIALDETAILS_NAME = "Name";
+	public static final String COL_SOCIALDETAILS_EMAILADDRESS = "EmailAddress";
+	public static final String COL_SOCIALDETAILS_PASSWORD = "Password";
 }

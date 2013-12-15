@@ -1,18 +1,29 @@
 package com.khushnish.mywallet.fragment;
 
+import java.io.File;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -50,6 +61,12 @@ public class AddCardDetailsFragment extends Fragment {
 	private Spinner spinnerValidTillMonth;
 	private Spinner spinnerValidTillYear;
 	
+	private ImageView imgFrontImage;
+	private ImageView imgBackImage;
+	
+	private File fileFrontImage;
+	private File fileBackImage;
+	
 	private boolean isEdit = false;
 	
 	private String[] months;
@@ -57,6 +74,9 @@ public class AddCardDetailsFragment extends Fragment {
 	private String[] validTillYears;
 	
 	private CardModel cardModel;
+	
+	private final int CAMERA_REQUEST = 200;
+	private final int CAMERA_CROP = 201;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +89,7 @@ public class AddCardDetailsFragment extends Fragment {
 	
 	private void initializeComponents(View view) {
 		setHasOptionsMenu(true);
+		setRetainInstance(true);
 		
 		chkCardCvvPassword = (CheckBoxRoboto) view.findViewById(R.id.fragment_add_details_chk_cardcvvnumber);
 		chkCardAtmPinNumber = (CheckBoxRoboto) view.findViewById(R.id.fragment_add_details_chk_cardatmpinmumber);
@@ -93,6 +114,9 @@ public class AddCardDetailsFragment extends Fragment {
 		spinnerValidFromYear = (Spinner) view.findViewById(R.id.fragment_add_details_spinner_validfromyear);
 		spinnerValidTillMonth = (Spinner) view.findViewById(R.id.fragment_add_details_spinner_validthrumonth);
 		spinnerValidTillYear = (Spinner) view.findViewById(R.id.fragment_add_details_spinner_validthruyear);
+		
+		imgFrontImage = (ImageView) view.findViewById(R.id.fragment_add_details_img_front);
+		imgBackImage = (ImageView) view.findViewById(R.id.fragment_add_details_img_back);
 		
 		months = getActivity().getResources().getStringArray(R.array.months);
 		validFromYears = getActivity().getResources().getStringArray(R.array.validfromyears);
@@ -120,13 +144,24 @@ public class AddCardDetailsFragment extends Fragment {
 			}
 		});
 		
+		imgFrontImage.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				fileFrontImage = new File(Environment.getExternalStorageDirectory() + File.separator + "frontimage.png");
+				final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileFrontImage));
+				startActivityForResult(intent, CAMERA_REQUEST);
+			}
+		});
+		
 		final Bundle bundle = getArguments();
 		
 		if ( bundle!= null && bundle.containsKey("isEdit") ) {
 			isEdit = bundle.getBoolean("isEdit", false);
 			cardModel = bundle.getParcelable("cardModel");
 			
-			setValues(cardModel);
+			setValues(view);
 		} else {
 			cardModel = new CardModel();
 		}
@@ -158,12 +193,54 @@ public class AddCardDetailsFragment extends Fragment {
 		if ( item.getItemId() == R.id.menu_save_details ) {
 			saveCardDetails();
 			getFragmentManager().popBackStackImmediate();
-		}
+		} else if (item.getItemId() == android.R.id.home) {
+			getFragmentManager().popBackStack();
+	        return true;
+	    }
 		
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private void setValues( CardModel cardModel ) {
+	private void setValues(View view) {
+		
+		final int cardType = Integer.parseInt(cardModel.getCardType());
+		final int cardUserType = Integer.parseInt(cardModel.getCardUserType());
+		
+		switch (cardType) {
+		case R.id.fragment_add_carddetails_rb_visa:
+			final RadioButton rbVisa = (RadioButton) view.findViewById(R.id.fragment_add_carddetails_rb_visa);
+			rbVisa.setChecked(true);
+			break;
+		case R.id.fragment_add_carddetails_rb_master:
+			final RadioButton rbMaster = (RadioButton) view.findViewById(R.id.fragment_add_carddetails_rb_master);
+			rbMaster.setChecked(true);
+			break;
+		case R.id.fragment_add_carddetails_rb_mastero:
+			final RadioButton rbMastero = (RadioButton) view.findViewById(R.id.fragment_add_carddetails_rb_mastero);
+			rbMastero.setChecked(true);
+			break;
+		case R.id.fragment_add_carddetails_rb_other:
+			final RadioButton rbOther = (RadioButton) view.findViewById(R.id.fragment_add_carddetails_rb_other);
+			rbOther.setChecked(true);
+			break;
+		default:
+			break;
+		}
+		
+		switch (cardUserType) {
+		case R.id.fragment_add_carddetails_rb_personal:
+			final RadioButton rbPersonal = (RadioButton) view.findViewById(R.id.fragment_add_carddetails_rb_personal);
+			rbPersonal.setChecked(true);
+			break;
+		case R.id.fragment_add_carddetails_rb_business:
+			final RadioButton rbBusiness = (RadioButton) view.findViewById(R.id.fragment_add_carddetails_rb_business);
+			rbBusiness.setChecked(true);
+			break;
+		default:
+			break;
+		}
+		
+		edtCardOther.setText(cardModel.getOtherCardName());
 		edtBankName.setText(cardModel.getBankName());
 		edtBankAccountNumber.setText(cardModel.getBankAccountNumber());
 		edtBankCustomerId.setText(cardModel.getBankCustomerId());
@@ -205,9 +282,9 @@ public class AddCardDetailsFragment extends Fragment {
 	
 	private void saveCardDetails() {
 		
-		cardModel.setCardType(rgCardType.getCheckedRadioButtonId());
+		cardModel.setCardType(String.valueOf(rgCardType.getCheckedRadioButtonId()));
 		cardModel.setOtherCardName(edtCardOther.getText().toString());
-		cardModel.setCardUserType(rgCardUserType.getCheckedRadioButtonId());
+		cardModel.setCardUserType(String.valueOf(rgCardUserType.getCheckedRadioButtonId()));
 		cardModel.setBankName(edtBankName.getText().toString());
 		cardModel.setBankAccountNumber(edtBankAccountNumber.getText().toString());
 		cardModel.setBankCustomerId(edtBankCustomerId.getText().toString());
@@ -215,25 +292,51 @@ public class AddCardDetailsFragment extends Fragment {
 		cardModel.setCardHolderName(edtBankCardHolderName.getText().toString());
 		
 		if ( !TextUtils.isEmpty(edtBankCardCvvNumber.getText().toString()) ) {
-			cardModel.setCardCvvNumber(Integer.parseInt(edtBankCardCvvNumber.getText().toString()));
+			cardModel.setCardCvvNumber(edtBankCardCvvNumber.getText().toString());
 		}
 		
 		if ( !TextUtils.isEmpty(edtBankCardAtmPinNumber.getText().toString()) ) {
-			cardModel.setCardAtmPinNumber(Integer.parseInt(edtBankCardAtmPinNumber.getText().toString()));
+			cardModel.setCardAtmPinNumber(edtBankCardAtmPinNumber.getText().toString());
 		}
 		
 		cardModel.setCardTransactionPassword(edtBankCardTransactionPassword.getText().toString());
 		
 		if ( !TextUtils.isEmpty(edtBankCardMobilePinNumber.getText().toString()) ) {
-			cardModel.setBankCardMobilePinNumber(Integer.parseInt(edtBankCardMobilePinNumber.getText().toString()));
+			cardModel.setBankCardMobilePinNumber(edtBankCardMobilePinNumber.getText().toString());
 		}
 		
-		cardModel.setValidFromMonth(Integer.parseInt(months[spinnerValidFromMonth.getSelectedItemPosition()]));
-		cardModel.setValidFromYear(Integer.parseInt(validFromYears[spinnerValidFromYear.getSelectedItemPosition()]));
-		cardModel.setValidTillMonth(Integer.parseInt(months[spinnerValidTillMonth.getSelectedItemPosition()]));
-		cardModel.setValidTillYear(Integer.parseInt(validTillYears[spinnerValidTillYear.getSelectedItemPosition()]));
+		cardModel.setValidFromMonth(months[spinnerValidFromMonth.getSelectedItemPosition()]);
+		cardModel.setValidFromYear(validFromYears[spinnerValidFromYear.getSelectedItemPosition()]);
+		cardModel.setValidTillMonth(months[spinnerValidTillMonth.getSelectedItemPosition()]);
+		cardModel.setValidTillYear(validTillYears[spinnerValidTillYear.getSelectedItemPosition()]);
 		
 		final DatabaseHelper databaseHelper = ((MyWallet)getActivity().getApplication()).getDatabaseHelper();
 		databaseHelper.insertOrUpdateCardDetails(cardModel, isEdit);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		Log.e(getTag(), "onActivityResult() called : requestCode : " + requestCode
+				+", resultCode : " + resultCode);
+		
+		Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
+		Log.e(getTag(), "URI : " + ((data == null) ? "Null" : data.getData().toString()));
+		
+		if ( requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK ) {
+			
+//			Bitmap bmp = (Bitmap) data.getExtras().get("data");
+			imgFrontImage.setImageURI(Uri.fromFile(fileFrontImage));
+//			Intent cropIntent = new Intent("com.android.camera.action.CROP");
+//	        cropIntent.setDataAndType(Uri.fromFile(new File(fileFrontImage.toString())), "image/*");
+//	        cropIntent.putExtra("crop", "true");
+//	        cropIntent.putExtra("aspectX", 1);
+//	        cropIntent.putExtra("aspectY", 1);
+//	        cropIntent.putExtra("outputX", 256);
+//	        cropIntent.putExtra("outputY", 256);
+//	        cropIntent.putExtra("return-data", true);
+//	        startActivityForResult(cropIntent, CAMERA_CROP);
+		}
 	}
 }

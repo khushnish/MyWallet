@@ -476,7 +476,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/add_details_card_mobilepinnumber"
                     android:inputType="textPassword"
-                    android:maxLength="3"
                     android:singleLine="true"
                     android:textSize="12sp" />
 

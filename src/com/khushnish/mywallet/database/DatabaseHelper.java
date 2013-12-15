@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.khushnish.mywallet.R;
 import com.khushnish.mywallet.model.CardModel;
+import com.khushnish.mywallet.model.SocialModel;
 import com.khushnish.mywallet.utils.Crypto;
 import com.khushnish.mywallet.utils.Utils;
 
@@ -36,8 +37,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		
 		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType TEXT, OtherCardName TEXT, CardUserType TEXT, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber TEXT, CardATMPinNumber TEXT, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth TEXT, ValidFromYear TEXT, ValidTillMonth TEXT, ValidTillYear TEXT, ImageFront TEXT, ImageBack TEXT)";
+		final String socialTable = "CREATE TABLE IF NOT EXISTS SocialDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, EmailAddress TEXT, Password TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
+		this.database.execSQL(socialTable);
 	}
 
 	@Override
@@ -167,6 +170,72 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return -1;
 	}
+	
+	public ArrayList<SocialModel> getAllSocialDetails() {
+		final ArrayList<SocialModel> socialModels = new ArrayList<SocialModel>();
+		if ( database == null ) {
+			open();
+		}
+		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_SOCIALDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				SocialModel socialModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					socialModel = new SocialModel();
+					socialModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					socialModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_SOCIALDETAILS_NAME)), Utils.key));
+					socialModel.setEmailAddress(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_SOCIALDETAILS_EMAILADDRESS)), Utils.key));
+					socialModel.setPassword(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_SOCIALDETAILS_PASSWORD)), Utils.key));
+					socialModels.add(socialModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		socialModels.trimToSize();
+		return socialModels;
+	}
+	
+	public long insertOrUpdateSocialDetails( SocialModel socialModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_SOCIALDETAILS_NAME, 
+					encryptor.encrypt(socialModel.getName(), Utils.key));
+			values.put(DBConstants.COL_SOCIALDETAILS_EMAILADDRESS,
+					encryptor.encrypt(socialModel.getEmailAddress(), Utils.key));
+			values.put(DBConstants.COL_SOCIALDETAILS_PASSWORD,
+					encryptor.encrypt(socialModel.getPassword(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_SOCIALDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(socialModel.getId())});
+				return socialModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_SOCIALDETAILS, null, values);
+			}
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+		
 	
 	private final Encryptor PADDING_ENCRYPTOR = new Encryptor() {
 

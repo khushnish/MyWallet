@@ -103,7 +103,10 @@ public class ListCardDetailsFragment extends Fragment {
 			transaction.addToBackStack(AddCardDetailsFragment.class.getSimpleName());
 			transaction.hide(this);
 			transaction.commit();
-		}
+		} else if (item.getItemId() == android.R.id.home) {
+	        getFragmentManager().popBackStack();
+	        return true;
+	    }
 		return super.onOptionsItemSelected(item);
 	}
 	

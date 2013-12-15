@@ -34,6 +34,11 @@
     <string name="add_details_card_validtill">Valid Till</string>
     <string name="add_details_card_frontimage">CardFront Image</string>
     <string name="add_details_card_backimage">Card Back Image</string>
+    
+    <string name="add_socialdetails_name">Name</string>
+    <string name="add_socialdetails_emailaddress">Email Address</string>
+    <string name="add_socialdetails_password">Password</string>
+    <string name="add_socialdetails_show_password">Show Password</string>
 		
     <string-array name="titles">
         <item>Cards Details</item>
@@ -48,6 +53,7 @@
     </string-array>
     
     <string-array name="months">
+        <item>-</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -63,6 +69,7 @@
     </string-array>
     
     <string-array name="validfromyears">
+        <item>-</item>
         <item>2000</item>
         <item>2001</item>
         <item>2002</item>
@@ -81,6 +88,7 @@
     </string-array>
     
    	<string-array name="validthruyears">
+   	    <item>-</item>
 		<item>2013</item>
         <item>2014</item>
         <item>2015</item>

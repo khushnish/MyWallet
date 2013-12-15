@@ -51,10 +51,13 @@ public class ListDetailsFragment extends Fragment {
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out,R.anim.left_in, R.anim.right_out);
 				
 				if ( position == 0 ) {
-					transaction.add(R.id.activity_main_frame, new ListCardDetailsFragment(), ListCardDetailsFragment.class.getSimpleName());
+					transaction.add(R.id.activity_main_frame, new ListCardDetailsFragment(), 
+							ListCardDetailsFragment.class.getSimpleName());
 					transaction.addToBackStack(ListCardDetailsFragment.class.getSimpleName());
-				} else if ( position == 1 ) {
-					
+				} else if ( position == 6 ) {
+					transaction.add(R.id.activity_main_frame, new ListSocialDetailsFragment(), 
+							ListSocialDetailsFragment.class.getSimpleName());
+					transaction.addToBackStack(ListSocialDetailsFragment.class.getSimpleName());
 				}
 				transaction.hide(ListDetailsFragment.this);
 				transaction.commit();

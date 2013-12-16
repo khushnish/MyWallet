@@ -29,6 +29,7 @@ import android.widget.Spinner;
 
 import com.khushnish.mywallet.MyWallet;
 import com.khushnish.mywallet.R;
+import com.khushnish.mywallet.cropimage.CropImage;
 import com.khushnish.mywallet.database.DatabaseHelper;
 import com.khushnish.mywallet.model.CardModel;
 import com.khushnish.mywallet.utils.ButtonRoboto;
@@ -151,6 +152,7 @@ public class AddCardDetailsFragment extends Fragment {
 				fileFrontImage = new File(Environment.getExternalStorageDirectory() + File.separator + "frontimage.png");
 				final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileFrontImage));
+				intent.putExtra("return-data", true);
 				startActivityForResult(intent, CAMERA_REQUEST);
 			}
 		});
@@ -321,22 +323,32 @@ public class AddCardDetailsFragment extends Fragment {
 		Log.e(getTag(), "onActivityResult() called : requestCode : " + requestCode
 				+", resultCode : " + resultCode);
 		
-		Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
-		Log.e(getTag(), "URI : " + ((data == null) ? "Null" : data.getData().toString()));
-		
 		if ( requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK ) {
 			
-//			Bitmap bmp = (Bitmap) data.getExtras().get("data");
-			imgFrontImage.setImageURI(Uri.fromFile(fileFrontImage));
-//			Intent cropIntent = new Intent("com.android.camera.action.CROP");
-//	        cropIntent.setDataAndType(Uri.fromFile(new File(fileFrontImage.toString())), "image/*");
-//	        cropIntent.putExtra("crop", "true");
-//	        cropIntent.putExtra("aspectX", 1);
-//	        cropIntent.putExtra("aspectY", 1);
-//	        cropIntent.putExtra("outputX", 256);
-//	        cropIntent.putExtra("outputY", 256);
-//	        cropIntent.putExtra("return-data", true);
-//	        startActivityForResult(cropIntent, CAMERA_CROP);
+			Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
+			Log.e(getTag(), "URI : " + ((data == null) ? "Null" : data.getData().toString()));
+			
+			final Intent intent = new Intent(getActivity(), CropImage.class);
+	        intent.putExtra(CropImage.IMAGE_PATH, fileFrontImage.getPath());
+	        intent.putExtra(CropImage.SCALE, true);
+
+	        intent.putExtra(CropImage.ASPECT_X, 3);
+	        intent.putExtra(CropImage.ASPECT_Y, 2);
+			
+	        startActivityForResult(intent, CAMERA_CROP);
+		} else if ( requestCode == CAMERA_CROP && resultCode == Activity.RESULT_OK ) {
+			Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
+			
+			String path = data.getStringExtra(CropImage.IMAGE_PATH);
+			
+			Log.e(getTag(), "New File Path : " + path);
+            if (path == null) {
+
+                return;
+            }
+            imgFrontImage.setImageURI(Uri.fromFile(fileFrontImage));
+//            Bitmap bitmap = BitmapFactory.decodeFile(fileFrontImage.getPath());
+//            imgFrontImage.setImageBitmap(bitmap);
 		}
 	}
 }

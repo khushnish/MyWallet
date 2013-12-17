@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -20,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -43,6 +43,7 @@ public class AddCardDetailsFragment extends Fragment {
 	private CheckBoxRoboto chkCardTransactionPassword;
 	private CheckBoxRoboto chkCardMobilePinNumber;
 	
+	private EditTextRoboto edtName;
 	private EditTextRoboto edtBankName;
 	private EditTextRoboto edtBankAccountNumber;
 	private EditTextRoboto edtBankCustomerId;
@@ -69,6 +70,7 @@ public class AddCardDetailsFragment extends Fragment {
 	private File fileBackImage;
 	
 	private boolean isEdit = false;
+	private boolean isFrontImage = false;
 	
 	private String[] months;
 	private String[] validFromYears;
@@ -97,6 +99,7 @@ public class AddCardDetailsFragment extends Fragment {
 		chkCardTransactionPassword = (CheckBoxRoboto) view.findViewById(R.id.fragment_add_details_chk_transactionpassword);
 		chkCardMobilePinNumber = (CheckBoxRoboto) view.findViewById(R.id.fragment_add_details_chk_cardmobilepinumber);
 		
+		edtName = (EditTextRoboto) view.findViewById(R.id.fragment_add_details_edt_name);
 		edtBankName = (EditTextRoboto) view.findViewById(R.id.fragment_add_details_edt_bankname);
 		edtBankAccountNumber = (EditTextRoboto) view.findViewById(R.id.fragment_add_details_edt_bankaccountnumber);
 		edtBankCustomerId = (EditTextRoboto) view.findViewById(R.id.fragment_add_details_edt_bankcustomerid);
@@ -128,6 +131,23 @@ public class AddCardDetailsFragment extends Fragment {
 		implementCheckListener(chkCardTransactionPassword, edtBankCardTransactionPassword);
 		implementCheckListener(chkCardMobilePinNumber, edtBankCardMobilePinNumber);
 		
+
+		edtName.setImeActionLabel("",EditorInfo.IME_ACTION_NEXT);
+
+//		edtName.setOnEditorActionListener(new OnEditorActionListener() {
+//
+//		            @Override
+//		            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//		                if(actionId==EditorInfo.IME_ACTION_NEXT){
+//		                    if( edtName.getText().toString().trim().equalsIgnoreCase(""))
+//    							edtName.setError("Please enter some thing!!!");
+//		                    else
+//		                        Toast.makeText(getActivity().getApplicationContext(),"Notnull",Toast.LENGTH_SHORT).show();
+//		                }
+//		                return false;
+//		            }
+//		        });
+		
 		rgCardType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			
 			@Override
@@ -149,9 +169,23 @@ public class AddCardDetailsFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				fileFrontImage = new File(Environment.getExternalStorageDirectory() + File.separator + "frontimage.png");
+				isFrontImage = true;
+				fileFrontImage = new File(getActivity().getExternalFilesDir(null) + File.separator + ".frontimage" + System.currentTimeMillis() + ".png");
 				final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileFrontImage));
+				intent.putExtra("return-data", true);
+				startActivityForResult(intent, CAMERA_REQUEST);
+			}
+		});
+		
+		imgBackImage.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				isFrontImage = false;
+				fileBackImage = new File(getActivity().getExternalFilesDir(null) + File.separator + ".backimage" + System.currentTimeMillis() + ".png");
+				final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileBackImage));
 				intent.putExtra("return-data", true);
 				startActivityForResult(intent, CAMERA_REQUEST);
 			}
@@ -193,8 +227,9 @@ public class AddCardDetailsFragment extends Fragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		if ( item.getItemId() == R.id.menu_save_details ) {
-			saveCardDetails();
-			getFragmentManager().popBackStackImmediate();
+			if( saveCardDetails() ) {
+				getFragmentManager().popBackStackImmediate();
+			}
 		} else if (item.getItemId() == android.R.id.home) {
 			getFragmentManager().popBackStack();
 	        return true;
@@ -253,6 +288,16 @@ public class AddCardDetailsFragment extends Fragment {
 		edtBankCardTransactionPassword.setText(cardModel.getCardTransactionPassword());
 		edtBankCardMobilePinNumber.setText(String.valueOf(cardModel.getBankCardMobilePinNumber()));
 		
+		if ( !TextUtils.isEmpty(cardModel.getImageFront()) && new File(cardModel.getImageFront()).exists() ) {
+			fileFrontImage = new File(cardModel.getImageFront());
+			imgFrontImage.setImageURI(Uri.fromFile(fileFrontImage));
+		}
+		
+		if ( !TextUtils.isEmpty(cardModel.getImageBack()) && new File(cardModel.getImageBack()).exists() ) {
+			fileBackImage = new File(cardModel.getImageBack());
+			imgBackImage.setImageURI(Uri.fromFile(fileBackImage));
+		}
+		
 		for (int i = 0; i < months.length; ++i) {
 			if ( months[i].equalsIgnoreCase(String.valueOf(cardModel.getValidFromMonth())) ) {
 				spinnerValidFromMonth.setSelection(i);
@@ -282,7 +327,12 @@ public class AddCardDetailsFragment extends Fragment {
 		}
 	}
 	
-	private void saveCardDetails() {
+	private boolean saveCardDetails() {
+		
+		if( edtName.getText().toString().trim().equalsIgnoreCase("")) {
+			edtName.setError("Please enter some thing!!!");
+			return false;
+		}
 		
 		cardModel.setCardType(String.valueOf(rgCardType.getCheckedRadioButtonId()));
 		cardModel.setOtherCardName(edtCardOther.getText().toString());
@@ -312,8 +362,18 @@ public class AddCardDetailsFragment extends Fragment {
 		cardModel.setValidTillMonth(months[spinnerValidTillMonth.getSelectedItemPosition()]);
 		cardModel.setValidTillYear(validTillYears[spinnerValidTillYear.getSelectedItemPosition()]);
 		
+		if ( fileFrontImage != null && fileFrontImage.exists() ) {
+			cardModel.setImageFront(fileFrontImage.getAbsolutePath());
+		}
+		
+		if ( fileBackImage != null && fileBackImage.exists() ) {
+			cardModel.setImageBack(fileBackImage.getAbsolutePath());
+		}
+		
 		final DatabaseHelper databaseHelper = ((MyWallet)getActivity().getApplication()).getDatabaseHelper();
 		databaseHelper.insertOrUpdateCardDetails(cardModel, isEdit);
+		
+		return true;
 	}
 	
 	@Override
@@ -325,11 +385,15 @@ public class AddCardDetailsFragment extends Fragment {
 		
 		if ( requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK ) {
 			
-			Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
-			Log.e(getTag(), "URI : " + ((data == null) ? "Null" : data.getData().toString()));
+//			Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
+//			Log.e(getTag(), "URI : " + ((data == null) ? "Null" : data.getData().toString()));
 			
 			final Intent intent = new Intent(getActivity(), CropImage.class);
-	        intent.putExtra(CropImage.IMAGE_PATH, fileFrontImage.getPath());
+			if ( isFrontImage ) {
+				intent.putExtra(CropImage.IMAGE_PATH, fileFrontImage.getPath());
+			} else {
+				intent.putExtra(CropImage.IMAGE_PATH, fileBackImage.getPath());
+			}
 	        intent.putExtra(CropImage.SCALE, true);
 
 	        intent.putExtra(CropImage.ASPECT_X, 3);
@@ -337,7 +401,7 @@ public class AddCardDetailsFragment extends Fragment {
 			
 	        startActivityForResult(intent, CAMERA_CROP);
 		} else if ( requestCode == CAMERA_CROP && resultCode == Activity.RESULT_OK ) {
-			Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
+//			Log.e(getTag(), "File Path : " + ((fileFrontImage == null) ? "Null" : fileFrontImage.getAbsolutePath()));
 			
 			String path = data.getStringExtra(CropImage.IMAGE_PATH);
 			
@@ -346,9 +410,13 @@ public class AddCardDetailsFragment extends Fragment {
 
                 return;
             }
-            imgFrontImage.setImageURI(Uri.fromFile(fileFrontImage));
-//            Bitmap bitmap = BitmapFactory.decodeFile(fileFrontImage.getPath());
-//            imgFrontImage.setImageBitmap(bitmap);
+            if ( isFrontImage ) {
+            	imgFrontImage.setImageBitmap(null);
+            	imgFrontImage.setImageURI(Uri.fromFile(fileFrontImage));
+            } else {
+            	imgBackImage.setImageBitmap(null);
+            	imgBackImage.setImageURI(Uri.fromFile(fileBackImage));
+            }
 		}
 	}
 }

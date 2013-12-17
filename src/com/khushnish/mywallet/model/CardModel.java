@@ -11,6 +11,7 @@ public class CardModel implements Parcelable {
 	private String otherCardName = "";
 	// Personal, Business
 	private String cardUserType = "";
+	private String name = "";
 	private String bankName = "";
 	private String bankAccountNumber = "";
 	private String bankCustomerId = "";
@@ -26,7 +27,7 @@ public class CardModel implements Parcelable {
 	private String imageFront = "";
 	private String imageBack = "";
 	private String bankCardMobilePinNumber = "";
-	
+
 	public CardModel() {
 	}
 
@@ -60,6 +61,14 @@ public class CardModel implements Parcelable {
 
 	public void setCardUserType(String cardUserType) {
 		this.cardUserType = cardUserType;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getBankName() {
@@ -187,6 +196,7 @@ public class CardModel implements Parcelable {
 		cardType = in.readString();
 		otherCardName = in.readString();
 		cardUserType = in.readString();
+		name = in.readString();
 		bankName = in.readString();
 		bankAccountNumber = in.readString();
 		bankCustomerId = in.readString();
@@ -215,6 +225,7 @@ public class CardModel implements Parcelable {
 		dest.writeString(cardType);
 		dest.writeString(otherCardName);
 		dest.writeString(cardUserType);
+		dest.writeString(name);
 		dest.writeString(bankName);
 		dest.writeString(bankAccountNumber);
 		dest.writeString(bankCustomerId);

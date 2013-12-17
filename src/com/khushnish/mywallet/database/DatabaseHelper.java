@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			this.database.execSQL("PRAGMA foreign_keys = ON;");
 		}
 		
-		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType TEXT, OtherCardName TEXT, CardUserType TEXT, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber TEXT, CardATMPinNumber TEXT, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth TEXT, ValidFromYear TEXT, ValidTillMonth TEXT, ValidTillYear TEXT, ImageFront TEXT, ImageBack TEXT)";
+		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType TEXT, OtherCardName TEXT, CardUserType TEXT, Name TEXT, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber TEXT, CardATMPinNumber TEXT, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth TEXT, ValidFromYear TEXT, ValidTillMonth TEXT, ValidTillYear TEXT, ImageFront TEXT, ImageBack TEXT)";
 		final String socialTable = "CREATE TABLE IF NOT EXISTS SocialDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, EmailAddress TEXT, Password TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
@@ -88,6 +88,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 							DBConstants.COL_CARDDETAILS_OTHERCARDNAME)), Utils.key));
 					cardModel.setCardUserType(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
 							DBConstants.COL_CARDDETAILS_CARDUSERTYPE)), Utils.key));
+					cardModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_CARDDETAILS_NAME)), Utils.key));
 					cardModel.setBankName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
 							DBConstants.COL_CARDDETAILS_BANKNAME)), Utils.key));
 					cardModel.setBankAccountNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
@@ -142,6 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			values.put(DBConstants.COL_CARDDETAILS_CARDTYPE, encryptor.encrypt(cardModel.getCardType(), Utils.key));
 			values.put(DBConstants.COL_CARDDETAILS_OTHERCARDNAME, encryptor.encrypt(cardModel.getOtherCardName(), Utils.key));
 			values.put(DBConstants.COL_CARDDETAILS_CARDUSERTYPE, encryptor.encrypt(cardModel.getCardUserType(), Utils.key));
+			values.put(DBConstants.COL_CARDDETAILS_NAME, encryptor.encrypt(cardModel.getName(), Utils.key));
 			values.put(DBConstants.COL_CARDDETAILS_BANKNAME, encryptor.encrypt(cardModel.getBankName(), Utils.key));
 			values.put(DBConstants.COL_CARDDETAILS_BANKACCOUNTNUMBER, encryptor.encrypt(cardModel.getBankAccountNumber(), Utils.key));
 			values.put(DBConstants.COL_CARDDETAILS_BANKCUSTOMERID, encryptor.encrypt(cardModel.getBankCustomerId(), Utils.key));

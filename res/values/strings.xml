@@ -14,6 +14,7 @@
     <string name="add_details_card_mastero">Mastero</string>
     <string name="add_details_card_other">Other</string>
     <string name="add_details_card_type">Card Type</string>
+    <string name="add_details_card_name">Name</string>
     <string name="add_details_card_usertype">Card User Type</string>
     <string name="add_details_card_usertype_personal">Personal</string>
     <string name="add_details_card_usertype_business">Business</string>
@@ -108,4 +109,12 @@
         <item>2029</item>
         <item>2030</item>
     </string-array>
+    
+   	<!-- Crop Image Strings -->
+   	<string name="cancel">Cancel</string>
+   	<string name="save">Save</string>
+   	<string name="saving_image">Saving image</string>
+   	<string name="preparing_card">Preparing card</string>
+    <string name="no_storage_card">No storage card</string>
+    <string name="not_enough_space">Not enough space</string>
 </resources>

@@ -9,6 +9,7 @@ public class DBConstants {
 	public static final String COL_CARDDETAILS_OTHERCARDNAME = "OtherCardName";
 	public static final String COL_CARDDETAILS_CARDUSERTYPE = "CardUserType";
 	public static final String COL_CARDDETAILS_BANKNAME = "BankName";
+	public static final String COL_CARDDETAILS_NAME = "Name";
 	public static final String COL_CARDDETAILS_BANKACCOUNTNUMBER = "BankAccountNumber";
 	public static final String COL_CARDDETAILS_BANKCUSTOMERID = "BankCustomerId";
 	public static final String COL_CARDDETAILS_CARDNUMBER = "CardNumber";

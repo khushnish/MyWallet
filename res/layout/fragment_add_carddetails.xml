@@ -9,6 +9,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_details_txt_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_details_card_name"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_details_edt_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_details_card_name"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
                 android:hint="@string/add_details_card_bankname"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:singleLine="true"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -182,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
                 android:hint="@string/add_details_card_bankaccountnumber"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:singleLine="true"
                 android:textSize="12sp" />
         </LinearLayout>

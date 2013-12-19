@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -131,8 +130,6 @@ public class AddCardDetailsFragment extends Fragment {
 		implementCheckListener(chkCardTransactionPassword, edtBankCardTransactionPassword);
 		implementCheckListener(chkCardMobilePinNumber, edtBankCardMobilePinNumber);
 		
-
-		edtName.setImeActionLabel("",EditorInfo.IME_ACTION_NEXT);
 
 //		edtName.setOnEditorActionListener(new OnEditorActionListener() {
 //
@@ -329,8 +326,8 @@ public class AddCardDetailsFragment extends Fragment {
 	
 	private boolean saveCardDetails() {
 		
-		if( edtName.getText().toString().trim().equalsIgnoreCase("")) {
-			edtName.setError("Please enter some thing!!!");
+		if ( edtName.getText().toString().trim().equalsIgnoreCase("") ) {
+			edtName.setError(getString(R.string.error_enter_name));
 			return false;
 		}
 		

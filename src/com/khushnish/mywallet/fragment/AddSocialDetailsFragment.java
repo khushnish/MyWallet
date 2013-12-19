@@ -88,8 +88,9 @@ public class AddSocialDetailsFragment extends Fragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		if ( item.getItemId() == R.id.menu_save_details ) {
-			saveCardDetails();
-			getFragmentManager().popBackStackImmediate();
+			if ( saveCardDetails() ) {
+				getFragmentManager().popBackStackImmediate();	
+			}
 		} else if (item.getItemId() == android.R.id.home) {
 			getFragmentManager().popBackStack();
 	        return true;
@@ -105,7 +106,12 @@ public class AddSocialDetailsFragment extends Fragment {
 		edtPassword.setText(socialModel.getPassword());
 	}
 	
-	private void saveCardDetails() {
+	private boolean saveCardDetails() {
+		
+		if ( edtName.getText().toString().trim().equalsIgnoreCase("") ) {
+			edtName.setError(getString(R.string.error_enter_name));
+			return false;
+		}
 		
 		socialModel.setName(edtName.getText().toString());
 		socialModel.setEmailAddress(edtEmailAddress.getText().toString());
@@ -113,5 +119,7 @@ public class AddSocialDetailsFragment extends Fragment {
 		
 		final DatabaseHelper databaseHelper = ((MyWallet)getActivity().getApplication()).getDatabaseHelper();
 		databaseHelper.insertOrUpdateSocialDetails(socialModel, isEdit);
+		
+		return true;
 	}
 }

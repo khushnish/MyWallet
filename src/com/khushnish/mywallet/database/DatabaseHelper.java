@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.khushnish.mywallet.R;
 import com.khushnish.mywallet.model.CardModel;
+import com.khushnish.mywallet.model.NotesModel;
 import com.khushnish.mywallet.model.SocialModel;
 import com.khushnish.mywallet.utils.Crypto;
 import com.khushnish.mywallet.utils.Utils;
@@ -37,9 +38,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		
 		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType TEXT, OtherCardName TEXT, CardUserType TEXT, Name TEXT, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber TEXT, CardATMPinNumber TEXT, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth TEXT, ValidFromYear TEXT, ValidTillMonth TEXT, ValidTillYear TEXT, ImageFront TEXT, ImageBack TEXT)";
+		final String notesTable = "CREATE TABLE IF NOT EXISTS NotesDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Description TEXT)";
 		final String socialTable = "CREATE TABLE IF NOT EXISTS SocialDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, EmailAddress TEXT, Password TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
+		this.database.execSQL(notesTable);
 		this.database.execSQL(socialTable);
 	}
 
@@ -238,7 +241,67 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return -1;
 	}
+	
+	public ArrayList<NotesModel> getAllNotesDetails() {
+		final ArrayList<NotesModel> socialModels = new ArrayList<NotesModel>();
+		if ( database == null ) {
+			open();
+		}
 		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_NOTESDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				NotesModel notesModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					notesModel = new NotesModel();
+					notesModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					notesModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_NOTESDETAILS_NAME)), Utils.key));
+					notesModel.setDescription(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_NOTESDETAILS_DESCRIPTION)), Utils.key));
+					socialModels.add(notesModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		socialModels.trimToSize();
+		return socialModels;
+	}
+	
+	public long insertOrUpdateNotesDetails( NotesModel notesModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_NOTESDETAILS_NAME, 
+					encryptor.encrypt(notesModel.getName(), Utils.key));
+			values.put(DBConstants.COL_NOTESDETAILS_DESCRIPTION,
+					encryptor.encrypt(notesModel.getDescription(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_NOTESDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(notesModel.getId())});
+				return notesModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_NOTESDETAILS, null, values);
+			}
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}
+		return -1;
+	}		
 	
 	private final Encryptor PADDING_ENCRYPTOR = new Encryptor() {
 

@@ -10,18 +10,18 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.khushnish.mywallet.R;
-import com.khushnish.mywallet.model.CardModel;
+import com.khushnish.mywallet.model.NotesModel;
 
-public class CardListDetailAdapter extends ArrayAdapter<CardModel> {
+public class NotesDetailAdapter extends ArrayAdapter<NotesModel> {
 	
 	private Context context;
-	private ArrayList<CardModel> cardModels;
+	private ArrayList<NotesModel> notesModels;
 	
-	public CardListDetailAdapter(Context context, int resource,
-			int textViewResourceId, ArrayList<CardModel> cardModels) {
-		super(context, resource, textViewResourceId, cardModels);
+	public NotesDetailAdapter(Context context, int resource,
+			int textViewResourceId, ArrayList<NotesModel> notesModels) {
+		super(context, resource, textViewResourceId, notesModels);
 		this.context = context;
-		this.cardModels = cardModels;
+		this.notesModels = notesModels;
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class CardListDetailAdapter extends ArrayAdapter<CardModel> {
 		    holder = (ViewHolder) convertView.getTag();
 		}
 		
-		holder.txtTitle.setText(cardModels.get(position).getName());
+		holder.txtTitle.setText(notesModels.get(position).getName());
 		
 		return convertView;
 	}

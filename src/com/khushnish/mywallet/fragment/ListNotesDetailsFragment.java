@@ -20,14 +20,14 @@ import android.widget.ListView;
 import com.khushnish.mywallet.MainActivity;
 import com.khushnish.mywallet.MyWallet;
 import com.khushnish.mywallet.R;
-import com.khushnish.mywallet.adapter.SocialDetailAdapter;
+import com.khushnish.mywallet.adapter.NotesDetailAdapter;
 import com.khushnish.mywallet.database.DatabaseHelper;
-import com.khushnish.mywallet.model.SocialModel;
+import com.khushnish.mywallet.model.NotesModel;
 
-public class ListSocialDetailsFragment extends Fragment {
+public class ListNotesDetailsFragment extends Fragment {
 	
-	private SocialDetailAdapter socialListDetailAdapter;
-	private ArrayList<SocialModel> socialModels;
+	private NotesDetailAdapter notesListDetailAdapter;
+	private ArrayList<NotesModel> notesModels;
 	private DatabaseHelper databaseHelper;
 	
 	@Override
@@ -51,11 +51,11 @@ public class ListSocialDetailsFragment extends Fragment {
 		((MainActivity) getActivity()).showBackButton();
 		setHasOptionsMenu(true);
 		
-		socialModels = new ArrayList<SocialModel>();
+		notesModels = new ArrayList<NotesModel>();
 		final ListView listCardDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
-		socialListDetailAdapter = new SocialDetailAdapter(getActivity(), R.layout.row_fragment_list_details,
-				R.id.row_fragment_list_details_title, socialModels);
-		listCardDetails.setAdapter(socialListDetailAdapter);
+		notesListDetailAdapter = new NotesDetailAdapter(getActivity(), R.layout.row_fragment_list_details,
+				R.id.row_fragment_list_details_title, notesModels);
+		listCardDetails.setAdapter(notesListDetailAdapter);
 		
 		listCardDetails.setOnItemClickListener(new OnItemClickListener() {
 
@@ -67,17 +67,17 @@ public class ListSocialDetailsFragment extends Fragment {
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out, 
 						R.anim.left_in, R.anim.right_out);
 				
-				final AddSocialDetailsFragment socialCardDetailsFragment = new AddSocialDetailsFragment();
+				final AddNotesDetailsFragment notesCardDetailsFragment = new AddNotesDetailsFragment();
 				final Bundle bundle = new Bundle();
 				
 				bundle.putBoolean("isEdit", true);
-				bundle.putParcelable("socialModel", socialModels.get(position));
-				socialCardDetailsFragment.setArguments(bundle);
+				bundle.putParcelable("notesModel", notesModels.get(position));
+				notesCardDetailsFragment.setArguments(bundle);
 				
-				transaction.add(R.id.activity_main_frame, socialCardDetailsFragment, 
-						AddSocialDetailsFragment.class.getSimpleName());
-				transaction.addToBackStack(AddSocialDetailsFragment.class.getSimpleName());
-				transaction.hide(ListSocialDetailsFragment.this);
+				transaction.add(R.id.activity_main_frame, notesCardDetailsFragment, 
+						AddNotesDetailsFragment.class.getSimpleName());
+				transaction.addToBackStack(AddNotesDetailsFragment.class.getSimpleName());
+				transaction.hide(ListNotesDetailsFragment.this);
 				transaction.commit();
 			}
 		});
@@ -99,9 +99,9 @@ public class ListSocialDetailsFragment extends Fragment {
 			final FragmentTransaction transaction = fragmentManager.beginTransaction();
 			transaction.setCustomAnimations(R.anim.right_in, 
 					R.anim.left_out,R.anim.left_in, R.anim.right_out);
-			transaction.add(R.id.activity_main_frame, new AddSocialDetailsFragment(),
-					AddSocialDetailsFragment.class.getSimpleName());
-			transaction.addToBackStack(AddSocialDetailsFragment.class.getSimpleName());
+			transaction.add(R.id.activity_main_frame, new AddNotesDetailsFragment(),
+					AddNotesDetailsFragment.class.getSimpleName());
+			transaction.addToBackStack(AddNotesDetailsFragment.class.getSimpleName());
 			transaction.hide(this);
 			transaction.commit();
 		} else if (item.getItemId() == android.R.id.home) {
@@ -118,15 +118,14 @@ public class ListSocialDetailsFragment extends Fragment {
 	}
 	
 	private void setListAdapter() {
-		socialModels.clear();
-		socialModels.addAll(databaseHelper.getAllSocialDetails());
-		Log.e("Database", "Social Size : " + socialModels.size());
-		socialListDetailAdapter.notifyDataSetChanged();
+		notesModels.clear();
+		notesModels.addAll(databaseHelper.getAllNotesDetails());
+		Log.e("Database", "Notes Size : " + notesModels.size());
+		notesListDetailAdapter.notifyDataSetChanged();
 	}
 	
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
-		Log.e("Fragment", "onHiddenChanged() called " + hidden);
 		
 		if ( !hidden ) {
 			setListAdapter();

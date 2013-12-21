@@ -1,9 +1,9 @@
 package com.khushnish.mywallet.database;
 
 public class DBConstants {
-	
+
 	public static final String ID = "ID";
-	
+
 	public static final String TBL_CARDDETAILS = "CardDetails";
 	public static final String COL_CARDDETAILS_CARDTYPE = "CardType";
 	public static final String COL_CARDDETAILS_OTHERCARDNAME = "OtherCardName";
@@ -24,9 +24,13 @@ public class DBConstants {
 	public static final String COL_CARDDETAILS_VALIDTILLYEAR = "ValidTillYear";
 	public static final String COL_CARDDETAILS_IMAGEFRONT = "ImageFront";
 	public static final String COL_CARDDETAILS_IMAGEBACK = "ImageBack";
-	
+
 	public static final String TBL_SOCIALDETAILS = "SocialDetails";
 	public static final String COL_SOCIALDETAILS_NAME = "Name";
 	public static final String COL_SOCIALDETAILS_EMAILADDRESS = "EmailAddress";
 	public static final String COL_SOCIALDETAILS_PASSWORD = "Password";
+
+	public static final String TBL_NOTESDETAILS = "NotesDetails";
+	public static final String COL_NOTESDETAILS_NAME = "Name";
+	public static final String COL_NOTESDETAILS_DESCRIPTION = "Description";
 }

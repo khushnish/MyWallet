@@ -110,6 +110,7 @@ public class AddSocialDetailsFragment extends Fragment {
 		
 		if ( edtName.getText().toString().trim().equalsIgnoreCase("") ) {
 			edtName.setError(getString(R.string.error_enter_name));
+			edtName.requestFocus();
 			return false;
 		}
 		

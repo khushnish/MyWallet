@@ -54,6 +54,10 @@ public class ListDetailsFragment extends Fragment {
 					transaction.add(R.id.activity_main_frame, new ListCardDetailsFragment(), 
 							ListCardDetailsFragment.class.getSimpleName());
 					transaction.addToBackStack(ListCardDetailsFragment.class.getSimpleName());
+				} else if ( position == 5 ) {
+					transaction.add(R.id.activity_main_frame, new ListNotesDetailsFragment(), 
+							ListNotesDetailsFragment.class.getSimpleName());
+					transaction.addToBackStack(ListSocialDetailsFragment.class.getSimpleName());
 				} else if ( position == 6 ) {
 					transaction.add(R.id.activity_main_frame, new ListSocialDetailsFragment(), 
 							ListSocialDetailsFragment.class.getSimpleName());

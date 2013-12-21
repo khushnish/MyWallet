@@ -275,6 +275,7 @@ public class AddCardDetailsFragment extends Fragment {
 		}
 		
 		edtCardOther.setText(cardModel.getOtherCardName());
+		edtName.setText(cardModel.getName());
 		edtBankName.setText(cardModel.getBankName());
 		edtBankAccountNumber.setText(cardModel.getBankAccountNumber());
 		edtBankCustomerId.setText(cardModel.getBankCustomerId());
@@ -328,12 +329,14 @@ public class AddCardDetailsFragment extends Fragment {
 		
 		if ( edtName.getText().toString().trim().equalsIgnoreCase("") ) {
 			edtName.setError(getString(R.string.error_enter_name));
+			edtName.requestFocus();
 			return false;
 		}
 		
 		cardModel.setCardType(String.valueOf(rgCardType.getCheckedRadioButtonId()));
 		cardModel.setOtherCardName(edtCardOther.getText().toString());
 		cardModel.setCardUserType(String.valueOf(rgCardUserType.getCheckedRadioButtonId()));
+		cardModel.setName(edtName.getText().toString());
 		cardModel.setBankName(edtBankName.getText().toString());
 		cardModel.setBankAccountNumber(edtBankAccountNumber.getText().toString());
 		cardModel.setBankCustomerId(edtBankCustomerId.getText().toString());

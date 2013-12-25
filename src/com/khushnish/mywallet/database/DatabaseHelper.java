@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.khushnish.mywallet.R;
+import com.khushnish.mywallet.model.BankDetailsModel;
 import com.khushnish.mywallet.model.CardModel;
 import com.khushnish.mywallet.model.NotesModel;
 import com.khushnish.mywallet.model.SocialModel;
@@ -38,12 +39,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		
 		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType TEXT, OtherCardName TEXT, CardUserType TEXT, Name TEXT, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber TEXT, CardATMPinNumber TEXT, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth TEXT, ValidFromYear TEXT, ValidTillMonth TEXT, ValidTillYear TEXT, ImageFront TEXT, ImageBack TEXT)";
-		final String notesTable = "CREATE TABLE IF NOT EXISTS NotesDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Description TEXT)";
-		final String socialTable = "CREATE TABLE IF NOT EXISTS SocialDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, EmailAddress TEXT, Password TEXT)";
+		final String bankDetailsTable = "CREATE TABLE IF NOT EXISTS BankDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, BankName TEXT, ProfileName TEXT, BankAccountNumber TEXT, Balance TEXT, BankCustomerId TEXT, LoginUserName TEXT, LoginPassword TEXT, TransactionPassword TEXT, MobilePinNumber TEXT, Others TEXT)";
+		final String loanDetailsTable = "CREATE TABLE IF NOT EXISTS LoanDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, LoanAccountNumer TEXT, BrnchName TEXT, LoanDate TEXT, SanctionDate TEXT, EMI TEXT, RateOfInterest TEXT, Tenure TEXT, LoanAmount TEXT, DistributedAmount TEXT, OutstandingAmount TEXT, Other TEXT)";
+		final String drivingLicenceDetailsTable = "CREATE TABLE IF NOT EXISTS DriverLicenseDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, DrivingLicenseNumber TEXT, Address TEXT, IssuedOn TEXT, DateOfBirth TEXT, TelephoneNumber TEXT, LicenceFor TEXT, ValidFrom TEXT, ValidTill TEXT, FrontImage TEXT, Other TEXT)";
+		final String passportDetailsTable = "CREATE TABLE IF NOT EXISTS DriverLicenseDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, PassportNumber TEXT, Type TEXT, CountryCode TEXT, Nationality TEXT, Gender TEXT, DateOfBirth TEXT, PlaceOfBirth TEXT, PlaceOfIssue TEXT, ValidFrom TEXT, ValidTill TEXT, FatherName TEXT, MotherName TEXT, Address TEXT, PassportFileNumber TEXT, PassportFrontImage TEXT, PassportBackImage TEXT, Other TEXT)";
+		final String notesDetailsTable = "CREATE TABLE IF NOT EXISTS NotesDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Description TEXT)";
+		final String socialDetailsTable = "CREATE TABLE IF NOT EXISTS SocialDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, EmailAddress TEXT, Password TEXT)";
+		final String otherDetailsTable = "CREATE TABLE IF NOT EXISTS OtherDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Details TEXT, Image1 TEXT, Image2 TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
-		this.database.execSQL(notesTable);
-		this.database.execSQL(socialTable);
+		this.database.execSQL(bankDetailsTable);
+		this.database.execSQL(loanDetailsTable);
+		this.database.execSQL(drivingLicenceDetailsTable);
+		this.database.execSQL(passportDetailsTable);
+		this.database.execSQL(notesDetailsTable);
+		this.database.execSQL(socialDetailsTable);
+		this.database.execSQL(otherDetailsTable);
 	}
 
 	@Override
@@ -170,6 +181,92 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				return cardModel.getId();
 			} else {
 				return database.insert(DBConstants.TBL_CARDDETAILS, null, values);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ArrayList<BankDetailsModel> getAllBankDetails() {
+		final ArrayList<BankDetailsModel> bankDetailsModels = new ArrayList<BankDetailsModel>();
+		if ( database == null ) {
+			open();
+		}
+		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_BANKDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				BankDetailsModel bankDetailsModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					bankDetailsModel = new BankDetailsModel();
+					bankDetailsModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					bankDetailsModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_NAME)), Utils.key));
+					bankDetailsModel.setBankName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_BANKNAME)), Utils.key));
+					bankDetailsModel.setProfileName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_PROFILENAME)), Utils.key));
+					bankDetailsModel.setBankAccountNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_BANKACCOUNTNUMBER)), Utils.key));
+					bankDetailsModel.setBalance(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_BALANCE)), Utils.key));
+					bankDetailsModel.setBankCustomerId(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_BANKCUSTOMERID)), Utils.key));
+					bankDetailsModel.setLoginUserName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_LOGINUSERNAME)), Utils.key));
+					bankDetailsModel.setLoginPassword(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_LOGINPASSWORD)), Utils.key));
+					bankDetailsModel.setTransactionPassword(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_TRANSACTIONPASSWORD)), Utils.key));
+					bankDetailsModel.setMobilePinNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_MOBILEPINNUMBER)), Utils.key));
+					bankDetailsModel.setOthers(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_BANKDETAILS_OTHERS)), Utils.key));
+					bankDetailsModels.add(bankDetailsModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		bankDetailsModels.trimToSize();
+		return bankDetailsModels;
+	}
+	
+	public long insertOrUpdateBankDetails( BankDetailsModel bankDetailsModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_BANKDETAILS_NAME, encryptor.encrypt(bankDetailsModel.getName(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_BANKNAME, encryptor.encrypt(bankDetailsModel.getBankName(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_PROFILENAME, encryptor.encrypt(bankDetailsModel.getProfileName(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_BANKACCOUNTNUMBER, encryptor.encrypt(bankDetailsModel.getBankAccountNumber(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_BALANCE, encryptor.encrypt(bankDetailsModel.getBalance(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_BANKCUSTOMERID, encryptor.encrypt(bankDetailsModel.getBankCustomerId(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_LOGINUSERNAME, encryptor.encrypt(bankDetailsModel.getLoginUserName(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_LOGINPASSWORD, encryptor.encrypt(bankDetailsModel.getLoginPassword(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_TRANSACTIONPASSWORD, encryptor.encrypt(bankDetailsModel.getTransactionPassword(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_MOBILEPINNUMBER, encryptor.encrypt(bankDetailsModel.getMobilePinNumber(), Utils.key));
+			values.put(DBConstants.COL_BANKDETAILS_OTHERS, encryptor.encrypt(bankDetailsModel.getOthers(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_BANKDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(bankDetailsModel.getId())});
+				return bankDetailsModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_BANKDETAILS, null, values);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

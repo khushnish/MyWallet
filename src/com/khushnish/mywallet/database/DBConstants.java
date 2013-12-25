@@ -24,6 +24,25 @@ public class DBConstants {
 	public static final String COL_CARDDETAILS_VALIDTILLYEAR = "ValidTillYear";
 	public static final String COL_CARDDETAILS_IMAGEFRONT = "ImageFront";
 	public static final String COL_CARDDETAILS_IMAGEBACK = "ImageBack";
+	
+	public static final String TBL_BANKDETAILS = "BankDetails";
+	public static final String COL_BANKDETAILS_NAME = "Name";
+	public static final String COL_BANKDETAILS_BANKNAME = "BankName";
+	public static final String COL_BANKDETAILS_PROFILENAME = "ProfileName";
+	public static final String COL_BANKDETAILS_BANKACCOUNTNUMBER = "BankAccountNumber";
+	public static final String COL_BANKDETAILS_BALANCE = "Balance";
+	public static final String COL_BANKDETAILS_BANKCUSTOMERID = "BankCustomerId";
+	public static final String COL_BANKDETAILS_LOGINUSERNAME = "LoginUserName";
+	public static final String COL_BANKDETAILS_LOGINPASSWORD = "LoginPassword";
+	public static final String COL_BANKDETAILS_TRANSACTIONPASSWORD = "TransactionPassword";
+	public static final String COL_BANKDETAILS_MOBILEPINNUMBER = "MobilePinNumber";
+	public static final String COL_BANKDETAILS_OTHERS = "Others";
+	
+	public static final String COL_BANKDETAILS_CARDNUMBER = "CardNumber";
+	public static final String COL_BANKDETAILS_CARDHOLDERNAME = "CardHolderName";
+	public static final String COL_BANKDETAILS_CARDCVVNUMBER = "CardCVVNumber";
+	public static final String COL_BANKDETAILS_CARDATMPINNUMBER = "CardATMPinNumber";
+	public static final String COL_BANKDETAILS_BANKMOBILEPINNUMBER = "BankMobilePinNumber";
 
 	public static final String TBL_SOCIALDETAILS = "SocialDetails";
 	public static final String COL_SOCIALDETAILS_NAME = "Name";

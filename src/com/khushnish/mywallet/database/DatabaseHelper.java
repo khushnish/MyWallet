@@ -15,6 +15,7 @@ import com.khushnish.mywallet.R;
 import com.khushnish.mywallet.model.BankDetailsModel;
 import com.khushnish.mywallet.model.CardModel;
 import com.khushnish.mywallet.model.NotesModel;
+import com.khushnish.mywallet.model.OthersDetailsModel;
 import com.khushnish.mywallet.model.SocialModel;
 import com.khushnish.mywallet.utils.Crypto;
 import com.khushnish.mywallet.utils.Utils;
@@ -42,10 +43,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		final String bankDetailsTable = "CREATE TABLE IF NOT EXISTS BankDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, BankName TEXT, ProfileName TEXT, BankAccountNumber TEXT, Balance TEXT, BankCustomerId TEXT, LoginUserName TEXT, LoginPassword TEXT, TransactionPassword TEXT, MobilePinNumber TEXT, Others TEXT)";
 		final String loanDetailsTable = "CREATE TABLE IF NOT EXISTS LoanDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, LoanAccountNumer TEXT, BrnchName TEXT, LoanDate TEXT, SanctionDate TEXT, EMI TEXT, RateOfInterest TEXT, Tenure TEXT, LoanAmount TEXT, DistributedAmount TEXT, OutstandingAmount TEXT, Other TEXT)";
 		final String drivingLicenceDetailsTable = "CREATE TABLE IF NOT EXISTS DriverLicenseDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, DrivingLicenseNumber TEXT, Address TEXT, IssuedOn TEXT, DateOfBirth TEXT, TelephoneNumber TEXT, LicenceFor TEXT, ValidFrom TEXT, ValidTill TEXT, FrontImage TEXT, Other TEXT)";
-		final String passportDetailsTable = "CREATE TABLE IF NOT EXISTS DriverLicenseDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, PassportNumber TEXT, Type TEXT, CountryCode TEXT, Nationality TEXT, Gender TEXT, DateOfBirth TEXT, PlaceOfBirth TEXT, PlaceOfIssue TEXT, ValidFrom TEXT, ValidTill TEXT, FatherName TEXT, MotherName TEXT, Address TEXT, PassportFileNumber TEXT, PassportFrontImage TEXT, PassportBackImage TEXT, Other TEXT)";
+		final String passportDetailsTable = "CREATE TABLE IF NOT EXISTS PassportDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, PassportNumber TEXT, Type TEXT, CountryCode TEXT, Nationality TEXT, Gender TEXT, DateOfBirth TEXT, PlaceOfBirth TEXT, PlaceOfIssue TEXT, ValidFrom TEXT, ValidTill TEXT, FatherName TEXT, MotherName TEXT, Address TEXT, PassportFileNumber TEXT, PassportFrontImage TEXT, PassportBackImage TEXT, Other TEXT)";
 		final String notesDetailsTable = "CREATE TABLE IF NOT EXISTS NotesDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Description TEXT)";
 		final String socialDetailsTable = "CREATE TABLE IF NOT EXISTS SocialDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, EmailAddress TEXT, Password TEXT)";
-		final String otherDetailsTable = "CREATE TABLE IF NOT EXISTS OtherDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Details TEXT, Image1 TEXT, Image2 TEXT)";
+		final String otherDetailsTable = "CREATE TABLE IF NOT EXISTS OtherDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Description TEXT, Image1 TEXT, Image2 TEXT)";
 		
 		this.database.execSQL(cardDetailsTable);
 		this.database.execSQL(bankDetailsTable);
@@ -340,7 +341,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public ArrayList<NotesModel> getAllNotesDetails() {
-		final ArrayList<NotesModel> socialModels = new ArrayList<NotesModel>();
+		final ArrayList<NotesModel> notesModels = new ArrayList<NotesModel>();
 		if ( database == null ) {
 			open();
 		}
@@ -361,7 +362,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 							DBConstants.COL_NOTESDETAILS_NAME)), Utils.key));
 					notesModel.setDescription(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
 							DBConstants.COL_NOTESDETAILS_DESCRIPTION)), Utils.key));
-					socialModels.add(notesModel);
+					notesModels.add(notesModel);
 				}
 			}
 		} catch (Exception e) {
@@ -371,8 +372,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				cursor.close();
 			}
 		}
-		socialModels.trimToSize();
-		return socialModels;
+		notesModels.trimToSize();
+		return notesModels;
 	}
 	
 	public long insertOrUpdateNotesDetails( NotesModel notesModel, boolean isEdit ) {
@@ -398,7 +399,76 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			e.printStackTrace();
 		}
 		return -1;
-	}		
+	}
+	
+	public ArrayList<OthersDetailsModel> getAllOtherDetails() {
+		final ArrayList<OthersDetailsModel> othersDetailsModels = new ArrayList<OthersDetailsModel>();
+		if ( database == null ) {
+			open();
+		}
+		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_OTHERDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				OthersDetailsModel othersDetailsModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					othersDetailsModel = new OthersDetailsModel();
+					othersDetailsModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					othersDetailsModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_OTHERDETAILS_NAME)), Utils.key));
+					othersDetailsModel.setDescription(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_OTHERDETAILS_DESCRIPTION)), Utils.key));
+					othersDetailsModel.setImage1(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_OTHERDETAILS_IMAGE1)), Utils.key));
+					othersDetailsModel.setImage2(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_OTHERDETAILS_IMAGE2)), Utils.key));
+					othersDetailsModels.add(othersDetailsModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		othersDetailsModels.trimToSize();
+		return othersDetailsModels;
+	}
+	
+	public long insertOrUpdateOthersDetails( OthersDetailsModel othersDetailsModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_OTHERDETAILS_NAME, 
+					encryptor.encrypt(othersDetailsModel.getName(), Utils.key));
+			values.put(DBConstants.COL_OTHERDETAILS_DESCRIPTION,
+					encryptor.encrypt(othersDetailsModel.getDescription(), Utils.key));
+			values.put(DBConstants.COL_OTHERDETAILS_IMAGE1,
+					encryptor.encrypt(othersDetailsModel.getImage1(), Utils.key));
+			values.put(DBConstants.COL_OTHERDETAILS_IMAGE2,
+					encryptor.encrypt(othersDetailsModel.getImage2(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_OTHERDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(othersDetailsModel.getId())});
+				return othersDetailsModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_OTHERDETAILS, null, values);
+			}
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 	private final Encryptor PADDING_ENCRYPTOR = new Encryptor() {
 

@@ -52,4 +52,10 @@ public class DBConstants {
 	public static final String TBL_NOTESDETAILS = "NotesDetails";
 	public static final String COL_NOTESDETAILS_NAME = "Name";
 	public static final String COL_NOTESDETAILS_DESCRIPTION = "Description";
+	
+	public static final String TBL_OTHERDETAILS = "OtherDetails";
+	public static final String COL_OTHERDETAILS_NAME = "Name";
+	public static final String COL_OTHERDETAILS_DESCRIPTION = "Description";
+	public static final String COL_OTHERDETAILS_IMAGE1 = "Image1";
+	public static final String COL_OTHERDETAILS_IMAGE2 = "Image2";
 }

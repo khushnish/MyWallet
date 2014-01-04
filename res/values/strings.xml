@@ -57,7 +57,12 @@
     <string name="add_socialdetails_password">Password</string>
     <string name="add_socialdetails_show_password">Show Password</string>
     
+    <!-- Notes -->
     <string name="add_notesdetails_description">Description</string>
+    
+    <!-- Others -->
+    <string name="add_otherdetails_description">Description</string>
+    <string name="add_otherdetails_image">Image</string>
     
     <string name="error_enter_name">Please Enter Name</string>
 		

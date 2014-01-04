@@ -57,15 +57,19 @@ public class ListDetailsFragment extends Fragment {
 				} else if ( position == 1 ) {
 					transaction.add(R.id.activity_main_frame, new ListBankDetailsFragment(), 
 							ListBankDetailsFragment.class.getSimpleName());
-					transaction.addToBackStack(ListCardDetailsFragment.class.getSimpleName());
+					transaction.addToBackStack(ListBankDetailsFragment.class.getSimpleName());
 				} else if ( position == 5 ) {
 					transaction.add(R.id.activity_main_frame, new ListNotesDetailsFragment(), 
 							ListNotesDetailsFragment.class.getSimpleName());
-					transaction.addToBackStack(ListSocialDetailsFragment.class.getSimpleName());
+					transaction.addToBackStack(ListNotesDetailsFragment.class.getSimpleName());
 				} else if ( position == 6 ) {
 					transaction.add(R.id.activity_main_frame, new ListSocialDetailsFragment(), 
 							ListSocialDetailsFragment.class.getSimpleName());
 					transaction.addToBackStack(ListSocialDetailsFragment.class.getSimpleName());
+				} else if ( position == 7 ) {
+					transaction.add(R.id.activity_main_frame, new ListOtherDetailsFragment(), 
+							ListOtherDetailsFragment.class.getSimpleName());
+					transaction.addToBackStack(ListOtherDetailsFragment.class.getSimpleName());
 				}
 				transaction.hide(ListDetailsFragment.this);
 				transaction.commit();

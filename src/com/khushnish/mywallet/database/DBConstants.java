@@ -43,6 +43,54 @@ public class DBConstants {
 	public static final String COL_BANKDETAILS_CARDCVVNUMBER = "CardCVVNumber";
 	public static final String COL_BANKDETAILS_CARDATMPINNUMBER = "CardATMPinNumber";
 	public static final String COL_BANKDETAILS_BANKMOBILEPINNUMBER = "BankMobilePinNumber";
+	
+	public static final String TBL_LOANDETAILS = "LoanDetails";
+	public static final String COL_LOANDETAILS_NAME = "Name";
+	public static final String COL_LOANDETAILS_LOANACCOUNTNUMER = "LoanAccountNumer";
+	public static final String COL_LOANDETAILS_BANKNAME = "BankName";
+	public static final String COL_LOANDETAILS_BRANCHNAME = "BranchName";
+	public static final String COL_LOANDETAILS_LOANDATE = "LoanDate";
+	public static final String COL_LOANDETAILS_SANCTIONDATE = "SanctionDate";
+	public static final String COL_LOANDETAILS_EMI = "EMI";
+	public static final String COL_LOANDETAILS_RATEOFINTEREST = "RateOfInterest";
+	public static final String COL_LOANDETAILS_TENURE = "Tenure";
+	public static final String COL_LOANDETAILS_LOANAMOUNT = "LoanAmount";
+	public static final String COL_LOANDETAILS_DISTRIBUTEDAMOUNT = "DistributedAmount";
+	public static final String COL_LOANDETAILS_OUTSTANDINGAMOUNT = "OutstandingAmount";
+	public static final String COL_LOANDETAILS_OTHER = "Other";
+	
+	public static final String TBL_DRIVERLICENSEDETAILS = "DriverLicenseDetails";
+	public static final String COL_DRIVERLICENSEDETAILS_NAME = "Name";
+	public static final String COL_DRIVERLICENSEDETAILS_DRIVINGLICENSENUMBER = "DrivingLicenseNumber";
+	public static final String COL_DRIVERLICENSEDETAILS_ADDRESS = "Address";
+	public static final String COL_DRIVERLICENSEDETAILS_ISSUEDON = "IssuedOn";
+	public static final String COL_DRIVERLICENSEDETAILS_DATEOFBIRTH = "DateOfBirth";
+	public static final String COL_DRIVERLICENSEDETAILS_TELEPHONENUMBER = "TelephoneNumber";
+	public static final String COL_DRIVERLICENSEDETAILS_LICENCEFOR = "LicenceFor";
+	public static final String COL_DRIVERLICENSEDETAILS_VALIDFROM = "ValidFrom";
+	public static final String COL_DRIVERLICENSEDETAILS_VALIDTILL = "ValidTill";
+	public static final String COL_DRIVERLICENSEDETAILS_FRONTIMAGE = "FrontImage";
+	public static final String COL_DRIVERLICENSEDETAILS_OTHER = "Other";
+	
+	public static final String TBL_PASSPORTDETAILS = "PassportDetails";
+	public static final String COL_PASSPORTDETAILS_NAME = "Name";
+	public static final String COL_PASSPORTDETAILS_PASSPORTNUMBER = "PassportNumber";
+	public static final String COL_PASSPORTDETAILS_TYPE = "Type";
+	public static final String COL_PASSPORTDETAILS_COUNTRYCODE = "CountryCode";
+	public static final String COL_PASSPORTDETAILS_NATIONALITY = "Nationality";
+	public static final String COL_PASSPORTDETAILS_GENDER = "Gender";
+	public static final String COL_PASSPORTDETAILS_DATEOFBIRTH = "DateOfBirth";
+	public static final String COL_PASSPORTDETAILS_PLACEOFBIRTH = "PlaceOfBirth";
+	public static final String COL_PASSPORTDETAILS_PLACEOFISSUE = "PlaceOfIssue";
+	public static final String COL_PASSPORTDETAILS_VALIDFROM = "ValidFrom";
+	public static final String COL_PASSPORTDETAILS_VALIDTILL = "ValidTill";
+	public static final String COL_PASSPORTDETAILS_FATHERNAME = "FatherName";
+	public static final String COL_PASSPORTDETAILS_MOTHERNAME = "MotherName";
+	public static final String COL_PASSPORTDETAILS_ADDRESS = "Address";
+	public static final String COL_PASSPORTDETAILS_PASSPORTFILENUMBER = "PassportFileNumber";
+	public static final String COL_PASSPORTDETAILS_PASSPORTFRONTIMAGE = "PassportFrontImage";
+	public static final String COL_PASSPORTDETAILS_PASSPORTBACKIMAGE = "PassportBackImage";
+	public static final String COL_PASSPORTDETAILS_OTHER = "Other";
 
 	public static final String TBL_SOCIALDETAILS = "SocialDetails";
 	public static final String COL_SOCIALDETAILS_NAME = "Name";

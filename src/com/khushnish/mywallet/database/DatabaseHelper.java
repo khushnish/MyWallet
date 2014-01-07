@@ -14,6 +14,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.khushnish.mywallet.R;
 import com.khushnish.mywallet.model.BankDetailsModel;
 import com.khushnish.mywallet.model.CardModel;
+import com.khushnish.mywallet.model.DrivingLicenseDetailsModel;
+import com.khushnish.mywallet.model.LoanDetailsModel;
 import com.khushnish.mywallet.model.NotesModel;
 import com.khushnish.mywallet.model.OthersDetailsModel;
 import com.khushnish.mywallet.model.SocialModel;
@@ -41,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		final String cardDetailsTable = "CREATE TABLE IF NOT EXISTS CardDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , CardType TEXT, OtherCardName TEXT, CardUserType TEXT, Name TEXT, BankName TEXT, BankAccountNumber TEXT, BankCustomerId TEXT, CardNumber TEXT, CardHolderName TEXT, CardCVVNumber TEXT, CardATMPinNumber TEXT, CardTransactionPassword TEXT, BankMobilePinNumber TEXT, ValidFromMonth TEXT, ValidFromYear TEXT, ValidTillMonth TEXT, ValidTillYear TEXT, ImageFront TEXT, ImageBack TEXT)";
 		final String bankDetailsTable = "CREATE TABLE IF NOT EXISTS BankDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, BankName TEXT, ProfileName TEXT, BankAccountNumber TEXT, Balance TEXT, BankCustomerId TEXT, LoginUserName TEXT, LoginPassword TEXT, TransactionPassword TEXT, MobilePinNumber TEXT, Others TEXT)";
-		final String loanDetailsTable = "CREATE TABLE IF NOT EXISTS LoanDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, LoanAccountNumer TEXT, BrnchName TEXT, LoanDate TEXT, SanctionDate TEXT, EMI TEXT, RateOfInterest TEXT, Tenure TEXT, LoanAmount TEXT, DistributedAmount TEXT, OutstandingAmount TEXT, Other TEXT)";
+		final String loanDetailsTable = "CREATE TABLE IF NOT EXISTS LoanDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, LoanAccountNumer TEXT, BankName TEXT, BranchName TEXT, LoanDate TEXT, SanctionDate TEXT, EMI TEXT, RateOfInterest TEXT, Tenure TEXT, LoanAmount TEXT, DistributedAmount TEXT, OutstandingAmount TEXT, Other TEXT)";
 		final String drivingLicenceDetailsTable = "CREATE TABLE IF NOT EXISTS DriverLicenseDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, DrivingLicenseNumber TEXT, Address TEXT, IssuedOn TEXT, DateOfBirth TEXT, TelephoneNumber TEXT, LicenceFor TEXT, ValidFrom TEXT, ValidTill TEXT, FrontImage TEXT, Other TEXT)";
 		final String passportDetailsTable = "CREATE TABLE IF NOT EXISTS PassportDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, PassportNumber TEXT, Type TEXT, CountryCode TEXT, Nationality TEXT, Gender TEXT, DateOfBirth TEXT, PlaceOfBirth TEXT, PlaceOfIssue TEXT, ValidFrom TEXT, ValidTill TEXT, FatherName TEXT, MotherName TEXT, Address TEXT, PassportFileNumber TEXT, PassportFrontImage TEXT, PassportBackImage TEXT, Other TEXT)";
 		final String notesDetailsTable = "CREATE TABLE IF NOT EXISTS NotesDetails (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , Name TEXT, Description TEXT)";
@@ -268,6 +270,184 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				return bankDetailsModel.getId();
 			} else {
 				return database.insert(DBConstants.TBL_BANKDETAILS, null, values);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ArrayList<LoanDetailsModel> getAllLoanDetails() {
+		final ArrayList<LoanDetailsModel> loanDetailsModels = new ArrayList<LoanDetailsModel>();
+		if ( database == null ) {
+			open();
+		}
+		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_LOANDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				LoanDetailsModel loanDetailsModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					loanDetailsModel = new LoanDetailsModel();
+					loanDetailsModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					loanDetailsModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_NAME)), Utils.key));
+					loanDetailsModel.setLoanAccountNumer(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_LOANACCOUNTNUMER)), Utils.key));
+					loanDetailsModel.setBankName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_BANKNAME)), Utils.key));
+					loanDetailsModel.setBranchName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_BRANCHNAME)), Utils.key));
+					loanDetailsModel.setLoanDate(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_LOANDATE)), Utils.key));
+					loanDetailsModel.setSanctionDate(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_SANCTIONDATE)), Utils.key));
+					loanDetailsModel.setEmi(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_EMI)), Utils.key));
+					loanDetailsModel.setRateOfInterest(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_RATEOFINTEREST)), Utils.key));
+					loanDetailsModel.setTenure(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_TENURE)), Utils.key));
+					loanDetailsModel.setLoanAmount(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_LOANAMOUNT)), Utils.key));
+					loanDetailsModel.setDistributedAmount(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_DISTRIBUTEDAMOUNT)), Utils.key));
+					loanDetailsModel.setOutstandingAmount(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_OUTSTANDINGAMOUNT)), Utils.key));
+					loanDetailsModel.setOthers(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_LOANDETAILS_OTHER)), Utils.key));
+					loanDetailsModels.add(loanDetailsModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		loanDetailsModels.trimToSize();
+		return loanDetailsModels;
+	}
+	
+	public long insertOrUpdateLoanDetails( LoanDetailsModel loanDetailsModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_LOANDETAILS_NAME, encryptor.encrypt(loanDetailsModel.getName(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_LOANACCOUNTNUMER, encryptor.encrypt(loanDetailsModel.getLoanAccountNumer(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_BANKNAME, encryptor.encrypt(loanDetailsModel.getBankName(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_BRANCHNAME, encryptor.encrypt(loanDetailsModel.getBranchName(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_LOANDATE, encryptor.encrypt(loanDetailsModel.getLoanDate(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_SANCTIONDATE, encryptor.encrypt(loanDetailsModel.getSanctionDate(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_EMI, encryptor.encrypt(loanDetailsModel.getEmi(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_RATEOFINTEREST, encryptor.encrypt(loanDetailsModel.getRateOfInterest(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_TENURE, encryptor.encrypt(loanDetailsModel.getTenure(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_LOANAMOUNT, encryptor.encrypt(loanDetailsModel.getLoanAmount(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_DISTRIBUTEDAMOUNT, encryptor.encrypt(loanDetailsModel.getDistributedAmount(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_OUTSTANDINGAMOUNT, encryptor.encrypt(loanDetailsModel.getOutstandingAmount(), Utils.key));
+			values.put(DBConstants.COL_LOANDETAILS_OTHER, encryptor.encrypt(loanDetailsModel.getOthers(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_LOANDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(loanDetailsModel.getId())});
+				return loanDetailsModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_LOANDETAILS, null, values);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ArrayList<DrivingLicenseDetailsModel> getAllDriverDetails() {
+		final ArrayList<DrivingLicenseDetailsModel> drivingLicenseDetailsModels = new ArrayList<DrivingLicenseDetailsModel>();
+		if ( database == null ) {
+			open();
+		}
+		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_DRIVERLICENSEDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				DrivingLicenseDetailsModel drivingLicenseDetailsModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					drivingLicenseDetailsModel = new DrivingLicenseDetailsModel();
+					drivingLicenseDetailsModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					drivingLicenseDetailsModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_NAME)), Utils.key));
+					drivingLicenseDetailsModel.setDrivingLicenseNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_DRIVINGLICENSENUMBER)), Utils.key));
+					drivingLicenseDetailsModel.setAddress(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_ADDRESS)), Utils.key));
+					drivingLicenseDetailsModel.setIssuedOn(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_ISSUEDON)), Utils.key));
+					drivingLicenseDetailsModel.setDateOfBirth(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_DATEOFBIRTH)), Utils.key));
+					drivingLicenseDetailsModel.setTelephoneNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_TELEPHONENUMBER)), Utils.key));
+					drivingLicenseDetailsModel.setLicenceFor(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_LICENCEFOR)), Utils.key));
+					drivingLicenseDetailsModel.setValidFrom(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_VALIDFROM)), Utils.key));
+					drivingLicenseDetailsModel.setValidTill(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_VALIDTILL)), Utils.key));
+					drivingLicenseDetailsModel.setFrontImage(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_FRONTIMAGE)), Utils.key));
+					drivingLicenseDetailsModel.setOthers(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_DRIVERLICENSEDETAILS_OTHER)), Utils.key));
+					drivingLicenseDetailsModels.add(drivingLicenseDetailsModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		drivingLicenseDetailsModels.trimToSize();
+		return drivingLicenseDetailsModels;
+	}
+	
+	public long insertOrUpdateDriverDetails( DrivingLicenseDetailsModel drivingLicenseDetailsModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_NAME, encryptor.encrypt(drivingLicenseDetailsModel.getName(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_DRIVINGLICENSENUMBER, encryptor.encrypt(drivingLicenseDetailsModel.getDrivingLicenseNumber(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_ADDRESS, encryptor.encrypt(drivingLicenseDetailsModel.getAddress(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_ISSUEDON, encryptor.encrypt(drivingLicenseDetailsModel.getIssuedOn(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_DATEOFBIRTH, encryptor.encrypt(drivingLicenseDetailsModel.getDateOfBirth(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_TELEPHONENUMBER, encryptor.encrypt(drivingLicenseDetailsModel.getTelephoneNumber(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_LICENCEFOR, encryptor.encrypt(drivingLicenseDetailsModel.getLicenceFor(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_VALIDFROM, encryptor.encrypt(drivingLicenseDetailsModel.getValidFrom(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_VALIDTILL, encryptor.encrypt(drivingLicenseDetailsModel.getValidTill(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_FRONTIMAGE, encryptor.encrypt(drivingLicenseDetailsModel.getFrontImage(), Utils.key));
+			values.put(DBConstants.COL_DRIVERLICENSEDETAILS_OTHER, encryptor.encrypt(drivingLicenseDetailsModel.getOthers(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_DRIVERLICENSEDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(drivingLicenseDetailsModel.getId())});
+				return drivingLicenseDetailsModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_DRIVERLICENSEDETAILS, null, values);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

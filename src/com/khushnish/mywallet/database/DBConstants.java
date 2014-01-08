@@ -38,12 +38,6 @@ public class DBConstants {
 	public static final String COL_BANKDETAILS_MOBILEPINNUMBER = "MobilePinNumber";
 	public static final String COL_BANKDETAILS_OTHERS = "Others";
 	
-	public static final String COL_BANKDETAILS_CARDNUMBER = "CardNumber";
-	public static final String COL_BANKDETAILS_CARDHOLDERNAME = "CardHolderName";
-	public static final String COL_BANKDETAILS_CARDCVVNUMBER = "CardCVVNumber";
-	public static final String COL_BANKDETAILS_CARDATMPINNUMBER = "CardATMPinNumber";
-	public static final String COL_BANKDETAILS_BANKMOBILEPINNUMBER = "BankMobilePinNumber";
-	
 	public static final String TBL_LOANDETAILS = "LoanDetails";
 	public static final String COL_LOANDETAILS_NAME = "Name";
 	public static final String COL_LOANDETAILS_LOANACCOUNTNUMER = "LoanAccountNumer";

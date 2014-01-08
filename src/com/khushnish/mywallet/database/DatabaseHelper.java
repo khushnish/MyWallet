@@ -18,6 +18,7 @@ import com.khushnish.mywallet.model.DrivingLicenseDetailsModel;
 import com.khushnish.mywallet.model.LoanDetailsModel;
 import com.khushnish.mywallet.model.NotesModel;
 import com.khushnish.mywallet.model.OthersDetailsModel;
+import com.khushnish.mywallet.model.PassportDetailsModel;
 import com.khushnish.mywallet.model.SocialModel;
 import com.khushnish.mywallet.utils.Crypto;
 import com.khushnish.mywallet.utils.Utils;
@@ -448,6 +449,113 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				return drivingLicenseDetailsModel.getId();
 			} else {
 				return database.insert(DBConstants.TBL_DRIVERLICENSEDETAILS, null, values);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ArrayList<PassportDetailsModel> getAllPassportDetails() {
+		final ArrayList<PassportDetailsModel> passportDetailsModels = new ArrayList<PassportDetailsModel>();
+		if ( database == null ) {
+			open();
+		}
+		
+		Cursor cursor = null;
+		
+		try {
+			cursor = database.query(DBConstants.TBL_PASSPORTDETAILS, new String[] {"*"}, null,
+					null, null, null, null);
+			
+			if ( cursor.getCount() > 0 ) {
+				PassportDetailsModel passportDetailsModel;
+				for (int i = 0; i < cursor.getCount(); ++i) {
+					cursor.moveToNext();
+					passportDetailsModel = new PassportDetailsModel();
+					passportDetailsModel.setId(cursor.getLong(cursor.getColumnIndex(DBConstants.ID)));
+					passportDetailsModel.setName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_NAME)), Utils.key));
+					passportDetailsModel.setPassportNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_PASSPORTNUMBER)), Utils.key));
+					passportDetailsModel.setType(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_TYPE)), Utils.key));
+					passportDetailsModel.setCountryCode(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_COUNTRYCODE)), Utils.key));
+					passportDetailsModel.setNationality(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_NATIONALITY)), Utils.key));
+					passportDetailsModel.setGender(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_GENDER)), Utils.key));
+					passportDetailsModel.setDateOfBirth(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_DATEOFBIRTH)), Utils.key));
+					passportDetailsModel.setPlaceOfBirth(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_PLACEOFBIRTH)), Utils.key));
+					passportDetailsModel.setPlaceOfIssue(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_PLACEOFISSUE)), Utils.key));
+					passportDetailsModel.setValidFrom(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_VALIDFROM)), Utils.key));
+					passportDetailsModel.setValidTill(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_VALIDTILL)), Utils.key));
+					passportDetailsModel.setFatherName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_FATHERNAME)), Utils.key));
+					passportDetailsModel.setMotherName(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_MOTHERNAME)), Utils.key));
+					passportDetailsModel.setAddress(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_ADDRESS)), Utils.key));
+					passportDetailsModel.setPassportFileNumber(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_PASSPORTFILENUMBER)), Utils.key));
+					passportDetailsModel.setPassportFrontImage(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_PASSPORTFRONTIMAGE)), Utils.key));
+					passportDetailsModel.setPassportBackImage(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_PASSPORTBACKIMAGE)), Utils.key));
+					passportDetailsModel.setOthers(encryptor.decrypt(cursor.getString(cursor.getColumnIndex(
+							DBConstants.COL_PASSPORTDETAILS_OTHER)), Utils.key));
+					passportDetailsModels.add(passportDetailsModel);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( cursor != null && !cursor.isClosed() ) {
+				cursor.close();
+			}
+		}
+		passportDetailsModels.trimToSize();
+		return passportDetailsModels;
+	}
+	
+	public long insertOrUpdatePassportDetails( PassportDetailsModel passportDetailsModel, boolean isEdit ) {
+		if ( database == null ) {
+			open();
+		}
+		
+		try {
+			final ContentValues values = new ContentValues();
+			values.put(DBConstants.COL_PASSPORTDETAILS_NAME, encryptor.encrypt(passportDetailsModel.getName(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_PASSPORTNUMBER, encryptor.encrypt(passportDetailsModel.getPassportNumber(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_TYPE, encryptor.encrypt(passportDetailsModel.getType(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_COUNTRYCODE, encryptor.encrypt(passportDetailsModel.getCountryCode(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_NATIONALITY, encryptor.encrypt(passportDetailsModel.getNationality(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_GENDER, encryptor.encrypt(passportDetailsModel.getGender(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_DATEOFBIRTH, encryptor.encrypt(passportDetailsModel.getDateOfBirth(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_PLACEOFBIRTH, encryptor.encrypt(passportDetailsModel.getPlaceOfBirth(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_PLACEOFISSUE, encryptor.encrypt(passportDetailsModel.getPlaceOfIssue(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_VALIDFROM, encryptor.encrypt(passportDetailsModel.getValidFrom(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_VALIDTILL, encryptor.encrypt(passportDetailsModel.getValidTill(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_FATHERNAME, encryptor.encrypt(passportDetailsModel.getFatherName(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_MOTHERNAME, encryptor.encrypt(passportDetailsModel.getMotherName(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_ADDRESS, encryptor.encrypt(passportDetailsModel.getAddress(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_PASSPORTFILENUMBER, encryptor.encrypt(passportDetailsModel.getPassportFileNumber(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_PASSPORTFRONTIMAGE, encryptor.encrypt(passportDetailsModel.getPassportFrontImage(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_PASSPORTBACKIMAGE, encryptor.encrypt(passportDetailsModel.getPassportBackImage(), Utils.key));
+			values.put(DBConstants.COL_PASSPORTDETAILS_OTHER, encryptor.encrypt(passportDetailsModel.getOthers(), Utils.key));
+			
+			if ( isEdit ) {
+				database.update(DBConstants.TBL_PASSPORTDETAILS, values, DBConstants.ID + "=?",
+						new String[] {String.valueOf(passportDetailsModel.getId())});
+				return passportDetailsModel.getId();
+			} else {
+				return database.insert(DBConstants.TBL_PASSPORTDETAILS, null, values);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

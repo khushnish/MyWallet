@@ -30,8 +30,8 @@
     <string name="add_details_card_atmpinmumber">Card ATM Pin Number</string>
     <string name="add_details_card_show_atmpinmumber">Show ATM Pin Number</string>
     <string name="add_details_card_transactionpassword">Card Transaction Password</string>
-    <string name="add_details_card_mobilepinnumber">Mobile Pin Number</string>
-    <string name="add_details_card_show_mobilepinnumber">Show Mobile Pin Number</string>
+    <string name="add_details_card_mobilepinnumber">Mobile Tele Pin Number</string>
+    <string name="add_details_card_show_mobilepinnumber">Show Mobile Tele Pin Number</string>
     <string name="add_details_card_show_transactionpassword">Show Password</string>
     <string name="add_details_card_validfrom">Valid From</string>
     <string name="add_details_card_validtill">Valid Till</string>

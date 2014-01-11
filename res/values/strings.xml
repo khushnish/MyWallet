@@ -12,10 +12,11 @@
     <!-- Common Strings -->
     <string name="others">Others</string>
     <string name="name">Name</string>
-    <string name="change_password">Change password</string>
-    <string name="current_password">Current password</string>
-    <string name="new_password">New password</string>
-    <string name="confirm_password">Confirm password</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="password">Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
     
     <string name="add_details_card_visa">Visa</string>
     <string name="add_details_card_master">Master</string>

@@ -57,6 +57,20 @@
     <string name="add_bankdetails_mobilepinnumber">Mobile Pin Number</string>
     <string name="add_bankdetails_show_mobilepinnumber">Show Mobile Pin Number</string>
     
+     <!-- Loan Details -->
+    <string name="add_loandetails_loanaccountnumber">Loan Account Number</string>
+    <string name="add_loandetails_bankname">Bank Name</string>
+    <string name="add_loandetails_branchname">Branch Name</string>
+    <string name="add_loandetails_loandate">Loan Date</string>
+    <string name="add_loandetails_sanctiondate">Sanction Date</string>
+    <string name="add_loandetails_selectdate">Select Date</string>
+    <string name="add_loandetails_emi">EMI</string>
+    <string name="add_loandetails_rateofinterest">Rate Of Interest</string>
+    <string name="add_loandetails_tenure">Tenure</string>
+    <string name="add_loandetails_loanamount">Loan Amount</string>
+    <string name="add_loandetails_distributedamount">Distributed Amount</string>
+    <string name="add_loandetails_outstandingamount">Outstanding Amount</string>
+    
     <!-- Social -->
     <string name="add_socialdetails_emailaddress">Email Address</string>
     <string name="add_socialdetails_password">Password</string>

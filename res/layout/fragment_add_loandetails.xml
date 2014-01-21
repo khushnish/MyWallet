@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/name"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/name"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_loanaccountnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_loanaccountnumber"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_loanaccountnumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_loanaccountnumber"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_bankname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_bankname"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_bankname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_bankname"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_branchname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_branchname"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_branchname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_branchname"
+                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_loandate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_loandate"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_loandatepicker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:focusable="false"
+                android:hint="@string/add_loandetails_selectdate"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_sanctiondate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_sanctiondate"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_sanctiondatepicker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:focusable="false"
+                android:hint="@string/add_loandetails_selectdate"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_loginusername_emi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_emi"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_emi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_emi"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_rateofinterest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_rateofinterest"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_rateofinterest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_rateofinterest"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_tenure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_tenure"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_tenure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_tenure"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_loanamount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_loanamount"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_loanamount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_loanamount"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_distributedamount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_distributedamount"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_distributedamount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_distributedamount"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_outstandingamount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/add_loandetails_outstandingamount"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_loandetails_edt_outstandingamount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/add_loandetails_outstandingamount"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3" >
+
+            <com.khushnish.mywallet.utils.TextViewRoboto
+                android:id="@+id/fragment_add_loandetails_txt_other"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:singleLine="true"
+                android:text="@string/others"
+                android:textSize="12sp" />
+
+            <com.khushnish.mywallet.utils.EditTextRoboto
+                android:id="@+id/fragment_add_bankdetails_edt_other"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:hint="@string/others"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+    </LinearLayout>
+
+</ScrollView>

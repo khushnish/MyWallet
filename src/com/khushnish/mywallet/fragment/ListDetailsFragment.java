@@ -20,6 +20,8 @@ import com.khushnish.mywallet.adapter.ListDetailAdapter;
 
 public class ListDetailsFragment extends Fragment {
 	
+	private ListView list;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -32,13 +34,17 @@ public class ListDetailsFragment extends Fragment {
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
 		((MainActivity) getActivity()).hideBackButton();
+		
+		if ( !hidden ) {
+			list.setEnabled(true);
+		}
 	}
 	
 	private void initializeComponents(View view) {
 		
 		setHasOptionsMenu(true);
 		
-		final ListView list = (ListView) view.findViewById(R.id.fragment_list_details_list);
+		list = (ListView) view.findViewById(R.id.fragment_list_details_list);
 		final String[] titles = getResources().getStringArray(R.array.titles);
 		list.setAdapter(new ListDetailAdapter(getActivity(), titles));
 		
@@ -46,6 +52,7 @@ public class ListDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
+				list.setEnabled(false);
 				final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				final FragmentTransaction transaction = fragmentManager.beginTransaction();
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out,R.anim.left_in, R.anim.right_out);
@@ -102,5 +109,5 @@ public class ListDetailsFragment extends Fragment {
 			transaction.commit();
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}	
 }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,6 +25,7 @@ import com.khushnish.mywallet.model.NotesModel;
 
 public class ListNotesDetailsFragment extends Fragment {
 	
+	private ListView listCardDetails;
 	private NotesDetailAdapter notesListDetailAdapter;
 	private ArrayList<NotesModel> notesModels;
 	private DatabaseHelper databaseHelper;
@@ -33,14 +33,12 @@ public class ListNotesDetailsFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.e("Fragment", "onCreate() called");
 		setRetainInstance(true);
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.e("Fragment", "onCreateView() called");
 		final View view = inflater.inflate(R.layout.fragment_list_carddetails, null);
 		
 		initializeComponents(view);
@@ -52,7 +50,7 @@ public class ListNotesDetailsFragment extends Fragment {
 		setHasOptionsMenu(true);
 		
 		notesModels = new ArrayList<NotesModel>();
-		final ListView listCardDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
+		listCardDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
 		notesListDetailAdapter = new NotesDetailAdapter(getActivity(), R.layout.row_fragment_list_details,
 				R.id.row_fragment_list_details_title, notesModels);
 		listCardDetails.setAdapter(notesListDetailAdapter);
@@ -62,6 +60,7 @@ public class ListNotesDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
+				listCardDetails.setClickable(false);
 				final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				final FragmentTransaction transaction = fragmentManager.beginTransaction();
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out, 
@@ -120,7 +119,6 @@ public class ListNotesDetailsFragment extends Fragment {
 	private void setListAdapter() {
 		notesModels.clear();
 		notesModels.addAll(databaseHelper.getAllNotesDetails());
-		Log.e("Database", "Notes Size : " + notesModels.size());
 		notesListDetailAdapter.notifyDataSetChanged();
 	}
 	
@@ -128,6 +126,7 @@ public class ListNotesDetailsFragment extends Fragment {
 		super.onHiddenChanged(hidden);
 		
 		if ( !hidden ) {
+			listCardDetails.setClickable(true);
 			setListAdapter();
 		}
 	}

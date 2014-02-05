@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +28,7 @@ public class ListLoanDetailsFragment extends Fragment {
 	private LoanListDetailAdapter loanListDetailAdapter;
 	private ArrayList<LoanDetailsModel> loanDetailsModels;
 	private DatabaseHelper databaseHelper;
+	private ListView listCardDetails;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class ListLoanDetailsFragment extends Fragment {
 		setHasOptionsMenu(true);
 		
 		loanDetailsModels = new ArrayList<LoanDetailsModel>();
-		final ListView listCardDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
+		listCardDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
 		loanListDetailAdapter = new LoanListDetailAdapter(getActivity(), R.layout.row_fragment_list_details,
 				R.id.row_fragment_list_details_title, loanDetailsModels);
 		listCardDetails.setAdapter(loanListDetailAdapter);
@@ -60,6 +60,7 @@ public class ListLoanDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
+				listCardDetails.setEnabled(false);
 				final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				final FragmentTransaction transaction = fragmentManager.beginTransaction();
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out,R.anim.left_in, R.anim.right_out);
@@ -114,7 +115,6 @@ public class ListLoanDetailsFragment extends Fragment {
 	private void setListAdapter() {
 		loanDetailsModels.clear();
 		loanDetailsModels.addAll(databaseHelper.getAllLoanDetails());
-		Log.e("Database", "Loan Size : " + loanDetailsModels.size());
 		loanListDetailAdapter.notifyDataSetChanged();
 	}
 	
@@ -122,6 +122,7 @@ public class ListLoanDetailsFragment extends Fragment {
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
 		if ( !hidden ) {
+			listCardDetails.setEnabled(true);
 			setListAdapter();
 		}
 	}

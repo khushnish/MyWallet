@@ -758,6 +758,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return -1;
 	}
 	
+	public String getEncryptedString(String password) {
+		return encryptor.encrypt(password, Utils.key);
+	}
+	
+	public String getDencryptedString(String password) {
+		return encryptor.decrypt(password, Utils.key);
+	}
+	
 	private final Encryptor PADDING_ENCRYPTOR = new Encryptor() {
 
         @Override

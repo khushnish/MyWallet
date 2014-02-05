@@ -8,44 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <com.khushnish.mywallet.utils.TextViewRoboto
-            android:id="@+id/fragment_settings_txt_currentpassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/current_password"
-            android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
-
-        <com.khushnish.mywallet.utils.EditTextRoboto
-            android:id="@+id/fragment_settings_edt_currentpassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="6"
-            android:inputType="numberPassword"
-            android:lines="1"
-            android:maxEms="4"
-            android:maxLength="4"
-            android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="vertical" >
 
         <com.khushnish.mywallet.utils.TextViewRoboto
-            android:id="@+id/fragment_settings_txt_newpassword"
+            android:id="@+id/fragment_newuserlogin_txt_newpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_password"
+            android:text="@string/password"
             android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
 
         <com.khushnish.mywallet.utils.EditTextRoboto
-            android:id="@+id/fragment_settings_edt_newpassword4"
+            android:id="@+id/fragment_newuserlogin_edt_newpassword4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="6"
@@ -63,7 +38,7 @@
         android:orientation="vertical" >
 
         <com.khushnish.mywallet.utils.TextViewRoboto
-            android:id="@+id/fragment_settings_txt_confirmpassword"
+            android:id="@+id/fragment_newuserlogin_txt_confirmpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -71,7 +46,7 @@
             android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
 
         <com.khushnish.mywallet.utils.EditTextRoboto
-            android:id="@+id/fragment_settings_edt_confirmpassword3"
+            android:id="@+id/fragment_newuserlogin_edt_confirmpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="6"
@@ -81,5 +56,12 @@
             android:maxLength="4"
             android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
     </LinearLayout>
+
+    <com.khushnish.mywallet.utils.ButtonRoboto
+        android:id="@+id/fragment_newuserlogin_btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/register" />
 
 </LinearLayout>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +24,8 @@ import com.khushnish.mywallet.database.DatabaseHelper;
 import com.khushnish.mywallet.model.OthersDetailsModel;
 
 public class ListOtherDetailsFragment extends Fragment {
+	
+	private ListView listOtherDetails;
 	
 	private OtherDetailAdapter otherListDetailAdapter;
 	private ArrayList<OthersDetailsModel> otherDetailsModels;
@@ -50,7 +51,7 @@ public class ListOtherDetailsFragment extends Fragment {
 		setHasOptionsMenu(true);
 		
 		otherDetailsModels = new ArrayList<OthersDetailsModel>();
-		final ListView listOtherDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
+		listOtherDetails = (ListView) view.findViewById(R.id.fragment_list_carddetails_list);
 		otherListDetailAdapter = new OtherDetailAdapter(getActivity(), R.layout.row_fragment_list_details,
 				R.id.row_fragment_list_details_title, otherDetailsModels);
 		listOtherDetails.setAdapter(otherListDetailAdapter);
@@ -60,6 +61,7 @@ public class ListOtherDetailsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
+				listOtherDetails.setEnabled(false);
 				final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				final FragmentTransaction transaction = fragmentManager.beginTransaction();
 				transaction.setCustomAnimations(R.anim.right_in, R.anim.left_out, 
@@ -118,7 +120,6 @@ public class ListOtherDetailsFragment extends Fragment {
 	private void setListAdapter() {
 		otherDetailsModels.clear();
 		otherDetailsModels.addAll(databaseHelper.getAllOtherDetails());
-		Log.e("Database", "Others Size : " + otherDetailsModels.size());
 		otherListDetailAdapter.notifyDataSetChanged();
 	}
 	
@@ -126,6 +127,7 @@ public class ListOtherDetailsFragment extends Fragment {
 		super.onHiddenChanged(hidden);
 		
 		if ( !hidden ) {
+			listOtherDetails.setEnabled(true);
 			setListAdapter();
 		}
 	}

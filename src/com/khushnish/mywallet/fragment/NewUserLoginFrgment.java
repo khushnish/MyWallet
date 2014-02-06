@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,8 @@ public class NewUserLoginFrgment extends Fragment {
 				if ( TextUtils.isEmpty(edtPassword.getText().toString()) ) {
 					edtPassword.requestFocus();
 					edtPassword.setError(getString(R.string.password_required));
+				} else if ( edtPassword.getText().length() < 4 ) {
+					edtPassword.setError(getString(R.string.password_criteria));
 				} else if ( TextUtils.isEmpty(edtConfirmPassword.getText().toString()) ) {
 					edtConfirmPassword.requestFocus();
 					edtConfirmPassword.setError(getString(R.string.password_required));
@@ -55,6 +59,14 @@ public class NewUserLoginFrgment extends Fragment {
 					final String password = edtPassword.getText().toString();
 					editor.putString(getString(R.string.pref_wallet_password), databaseHelper.getEncryptedString(password));
 					editor.commit();
+					
+					final FragmentManager fragmentManager = getFragmentManager();
+					final FragmentTransaction transaction = fragmentManager.beginTransaction();
+					transaction.replace(R.id.activity_main_frame, new ListDetailsFragment(), 
+							ListDetailsFragment.class.getSimpleName());	
+					transaction.commit();
+					
+					fragmentManager.popBackStack();
 				}
 			}
 		});
